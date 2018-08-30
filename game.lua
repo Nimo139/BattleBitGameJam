@@ -1,5 +1,6 @@
 function init()
-    solids={[2]=true,[3]=true}
+    --solids={[2]=true,[3]=true}
+	
 	t = 0
 	p={
 		x=20,
@@ -27,8 +28,12 @@ function mget2(x,y, room)
 	return mget(x+30*(room-1),y)
 end
 
+function isSolid(id)
+	return id >= 32 and id <= 79    -- #032-#079: Solid
+end
+
 function solid(x,y)
-    return solids[mget2((x)//8,(y)//8, inRoom)]
+    return isSolid(mget2((x)//8,(y)//8, inRoom))
 end
 
 --function lerp(a,b,t) return (1-t)*a + t*b end
