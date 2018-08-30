@@ -12,6 +12,10 @@ function init()
 	}
 	--cam={x=120,y=68}
 	
+	--Jumping physics
+	btn0released = true
+	
+	
 	inRoomNr = 1 
 	rooms = {}
 	for y = 0,136-17,17 do
@@ -25,14 +29,18 @@ function rget(i)
  return rooms[i][1],rooms[i][2],30,17
 end
 
+-- mget recalculation for rooms 
 function mget2(x,y, room)
 	return mget(x+30*(room-1),y)
 end
 
+
+-- is block id solid?
 function isSolid(id)
 	return id >= 32 and id <= 79    -- #032-#079: Solid
 end
 
+-- is a block at x,y solid? (actual map view)
 function solid(x,y)
     return isSolid(mget2((x)//8,(y)//8, inRoomNr))
 end
@@ -42,6 +50,7 @@ end
 init()
 function TIC()
 
+	-- button left/right
     if btn(2) then 
 		p.vx=-1
 		p.o = 1
@@ -51,10 +60,12 @@ function TIC()
     else p.vx=0
     end
     
+	-- wall left/right?
     if solid(p.x+p.vx,p.y+p.vy) or solid(p.x+7+p.vx,p.y+p.vy) or solid(p.x+p.vx,p.y+7+p.vy) or solid(p.x+7+p.vx,p.y+7+p.vy) then
         p.vx=0
     end
     
+	-- gravity 
     if solid(p.x,p.y+8+p.vy) or solid(p.x+7,p.y+8+p.vy) then
         p.vy=0
 		p.f = 0
@@ -63,10 +74,16 @@ function TIC()
 		p.f = 1
     end
     
-    if p.vy == 0 and btn(0) then 
+	--Jumping 
+    if p.vy == 0 and btn(0) and btn0released then 
 		p.vy=-2.5 
+		btn0released = false  -- no permanent jumping
+		
 	end
-
+	btn0released = not btn(0)
+		
+	
+	-- ceiling check 
     if p.vy<0 and (solid(p.x+p.vx,p.y+p.vy) or solid(p.x+7+p.vx,p.y+p.vy)) then
         p.vy=0
     end   
@@ -74,11 +91,14 @@ function TIC()
     p.x=p.x+p.vx
     p.y=p.y+p.vy
     
+	
+	-- respawn if p under map 
 	if p.y > 200 then
 		p.x=20
 		p.y=100
 	end
 	
+	-- switch to next room 
 	if p.x > 240 then 
 		p.x = 0
 		inRoomNr = inRoomNr + 1
@@ -100,6 +120,8 @@ function TIC()
 	--cam.y=math.min(64,lerp(cam.y,64-p.y,0.05))
 	--map(0,0,240,136,-cam.x,-cam.y)
 	
+	
+	-- cat animations 
 	if p.vy > 0 then
 		spr(6,p.x,p.y,0,1,p.o,0,0)
 	elseif p.vy<0 then
