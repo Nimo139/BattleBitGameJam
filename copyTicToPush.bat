@@ -1,0 +1,1 @@
+copy  "%appdata%\com.nesbox.tic\TIC-80\test.tic" "test.tic"
