@@ -10,7 +10,7 @@ function init()
 	}
 	cam={x=120,y=68}
 	
-	inRoom = 1 
+	inRoomNr = 1 
 	rooms = {}
 	for y = 0,136-17,17 do
 		for x = 0,240-30,30 do
@@ -33,7 +33,7 @@ function isSolid(id)
 end
 
 function solid(x,y)
-    return isSolid(mget2((x)//8,(y)//8, inRoom))
+    return isSolid(mget2((x)//8,(y)//8, inRoomNr))
 end
 
 --function lerp(a,b,t) return (1-t)*a + t*b end
@@ -72,14 +72,18 @@ function TIC()
 		p.y=100
 	end
 	
-	if p.x >240 then 
+	if p.x > 240 then 
 		p.x = 0
-		inRoom = inRoom + 1
-	end
+		inRoomNr = inRoomNr + 1
+	elseif p.x < 0 and inRoomNr > 1 then
+		p.x = 232
+		inRoomNr = inRoomNr - 1
+	end 
+	
 	
     cls()
     --map(0,0,30,17)
-	map(rget(inRoom))
+	map(rget(inRoomNr))
     --rect(p.x,p.y,8,8,15)
 	print(p.x,84,84)
 	t=t+1
