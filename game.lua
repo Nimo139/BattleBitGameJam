@@ -8,8 +8,7 @@ function init()
 		vx=0, --Velocity X
 		vy=0, --Velocity Y
 		o =0, --orientation
-		f =0, --falling
-		
+		f =0, --falling		
 	}
 	--cam={x=120,y=68}
 	
@@ -64,7 +63,7 @@ function TIC()
 		p.f = 1
     end
     
-    if btn(0) then 
+    if p.vy == 0 and btn(0) then 
 		p.vy=-2.5 
 	end
 
@@ -101,8 +100,10 @@ function TIC()
 	--cam.y=math.min(64,lerp(cam.y,64-p.y,0.05))
 	--map(0,0,240,136,-cam.x,-cam.y)
 	
-	if p.f == 1 then
+	if p.vy > 0 then
 		spr(6,p.x,p.y,0,1,p.o,0,0)
+	elseif p.vy<0 then
+		spr(5,p.x,p.y,0,1,p.o,0,0)
 	elseif p.vx==0 then
 		spr(2+t%80//40*2,p.x,p.y,0,1,p.o,0,0)
 	else
