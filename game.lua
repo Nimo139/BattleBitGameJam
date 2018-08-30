@@ -7,8 +7,9 @@ function init()
 		y=100,
 		vx=0, --Velocity X
 		vy=0, --Velocity Y
+		o =0,
 	}
-	cam={x=120,y=68}
+	--cam={x=120,y=68}
 	
 	inRoomNr = 1 
 	rooms = {}
@@ -24,7 +25,6 @@ function rget(i)
 end
 
 function mget2(x,y, room)
-	print(x+30*(room-1),84,95)
 	return mget(x+30*(room-1),y)
 end
 
@@ -41,8 +41,12 @@ end
 init()
 function TIC()
 
-    if btn(2) then p.vx=-1
-    elseif btn(3) then p.vx=1
+    if btn(2) then 
+		p.vx=-1
+		p.o = 1
+    elseif btn(3) then 
+		p.vx=1
+		p.o = 0
     else p.vx=0
     end
     
@@ -93,5 +97,5 @@ function TIC()
 	--cam.y=math.min(64,lerp(cam.y,64-p.y,0.05))
 	--map(0,0,240,136,-cam.x,-cam.y)
 	
-	spr(1+t%60//30*2,p.x,p.y,-1,1,0,0)
+	spr(1+t%60//30*2,p.x,p.y,0,1,p.o,0,0)
 end
