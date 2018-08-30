@@ -7,7 +7,9 @@ function init()
 		y=100,
 		vx=0, --Velocity X
 		vy=0, --Velocity Y
-		o =0,
+		o =0, --orientation
+		f =0, --falling
+		
 	}
 	--cam={x=120,y=68}
 	
@@ -56,8 +58,10 @@ function TIC()
     
     if solid(p.x,p.y+8+p.vy) or solid(p.x+7,p.y+8+p.vy) then
         p.vy=0
+		p.f = 0
     else
         p.vy=p.vy+0.2
+		p.f = 1
     end
     
     if btn(0) then 
@@ -97,7 +101,9 @@ function TIC()
 	--cam.y=math.min(64,lerp(cam.y,64-p.y,0.05))
 	--map(0,0,240,136,-cam.x,-cam.y)
 	
-	if p.vx==0 then
+	if p.f == 1 then
+		spr(6,p.x,p.y,0,1,p.o,0,0)
+	elseif p.vx==0 then
 		spr(2+t%80//40*2,p.x,p.y,0,1,p.o,0,0)
 	else
 		spr(1+t%20//10*2,p.x,p.y,0,1,p.o,0,0)
