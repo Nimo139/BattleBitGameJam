@@ -98,8 +98,8 @@ function TIC()
 	--map(0,0,240,136,-cam.x,-cam.y)
 	
 	if p.vx==0 then
-		spr(2+t%60//30*2,p.x,p.y,0,1,p.o,0,0)
+		spr(2+t%80//40*2,p.x,p.y,0,1,p.o,0,0)
 	else
-		spr(1+t%10//5*2,p.x,p.y,0,1,p.o,0,0)
+		spr(1+t%20//10*2,p.x,p.y,0,1,p.o,0,0)
 	end
 end
