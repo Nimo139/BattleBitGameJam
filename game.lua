@@ -153,13 +153,22 @@ function respawnWool()
 end
 
 function darwWoolString(x, y)
-	for i = x,w.x,1 do 
+	ox = x
+	oy = y
+	
+	for i = x,w.x,8 do 
 		y = 128             
 		while solid(i,y) do   -- respawn on the first solid block
 			y = y - 8
 		end
-		spr(68,i,y,0,1,0,0,0)
+		line(ox,oy+7,i,y+7,68)
+		
+		ox = i
+		oy = y
+		--spr(68,i,y,0,1,0,0,0)
+		x=i
 	end
+	line(x,y+7,w.x,w.y+7,68)
 end
 
 
