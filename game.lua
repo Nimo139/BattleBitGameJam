@@ -58,6 +58,11 @@ function solid(x,y)
     return isSolid(mget2((x)//8,(y)//8, inRoomNr))
 end
 
+function solidInRoom(x,y, room)
+    return isSolid(mget2((x)//8,(y)//8, room))
+end
+
+
 -- is a wool at x,y? (actual map view)
 function woolRight(x,y)
 	return (math.abs(p.x+7-w.x)<0.5 and math.abs(p.y-w.y)<0.5)
@@ -91,15 +96,27 @@ end
 	
 -- wool physics
 function woolUpdate()
+
+	
+	-- switch to next room 
+	if w.x > 240 then 
+		w.x = w.x - 240
+		w.room = w.room + 1
+	elseif w.x < 0 and w.room > 1 then
+		w.x = 232
+		w.room = w.room - 1
+	end 
+	
 	-- gravity 
-    if solid(w.x,w.y+8+w.vy) or solid(w.x+7,w.y+8+w.vy) then
+    if solidInRoom(w.x,w.y+8+w.vy, w.room) or solidInRoom(w.x+7,w.y+8+w.vy, w.room) then
         w.vy=0
     else
         w.vy=w.vy+0.2
     end
 	
 	--wall left right 
-	if solid(w.x+w.vx,w.y+w.vy) or solid(w.x+7+w.vx,w.y+w.vy) or solid(w.x+w.vx,w.y+7+w.vy) or solid(w.x+7+w.vx,w.y+7+w.vy) then
+	if solidInRoom(w.x+w.vx,w.y+w.vy, w.room) or solidInRoom(w.x+7+w.vx,w.y+w.vy, w.room) 
+	or solidInRoom(w.x+w.vx,w.y+7+w.vy, w.room) or solidInRoom(w.x+7+w.vx,w.y+7+w.vy, w.room) then
         w.vx=0
     end
 	
@@ -109,6 +126,10 @@ function woolUpdate()
 	
 	w.x=w.x+w.vx
     w.y=w.y+w.vy
+	
+
+	
+	
 end	
 	
 -- vector from cat to wool 
