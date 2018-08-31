@@ -1,10 +1,43 @@
 Track 01	Pattern 01	Beginning1
 		Pattern 02	Beginning2
 		Pattern 03	Lead1
-		Pattern 04	<empty>
-		Pattern 05	<empty>
+		Pattern 04	Arps1
+		Pattern 05	Arps2
 		Pattern 06	Bass1
 		Pattern 07	Bass2
-		Pattern 08	<empty>
+		Pattern 08	Triangle1
 		Pattern 09	Lead2
 		Pattern 10	Noise1
+		Pattern 11	Bass3
+		Pattern 12	Triangle2
+		Pattern 13	Bass4
+		Pattern 14	Triangle3
+		Pattern 15	SquareLead1
+		Pattern 16	SquareLead2
+		Pattern 17	SquareLead3
+		Pattern 18	TriangleBridge1
+		Pattern 19	SquareBridge1
+		Pattern 20	SawBridge1
+		Pattern 21	NoiseBridge1
+		Pattern 22	TriangleBridge2
+		Pattern 23	SquareBridge3
+		Pattern 24	SawBridge4
+		Pattern 25	SawBridge5
+		Pattern 26	Beginning3
+		Pattern 27	Beginning4
+
+SFX		00		Lead (Pulse 1)
+		01		Lead (Pulse 1) Pitch Slide Up
+		02		Saw
+		03		Hat
+		04		Kick
+		05		Arp058
+		06		Arp047
+		07		Arp049
+		08		Arp058 fade
+		09		Arp038
+		10		Arp039
+		11		Arp036
+		12		Arp039 fade
+		13		Triangle
+		14		Square
