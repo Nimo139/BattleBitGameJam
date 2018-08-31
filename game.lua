@@ -101,7 +101,7 @@ function throwWool()
 	
 	w.vx = (w.x-p.x)/2
 	w.vy = -3 --(w.y-p.y)
-	p.p = 30
+	p.p = 14
 
 end
 
@@ -182,7 +182,7 @@ function TIC()
 	if keyp(4) and dis < 16 then 
 		throwWool()
 	elseif keyp(4) and p.p ==  0 then 
-		p.p = 30
+		p.p = 14
 	end
 	woolUpdate()
 	
@@ -204,7 +204,7 @@ function TIC()
 	-- cat animations 
 	if p.p > 0 then
 		p.p = p.p -1 
-		spr(9+p.p//15,p.x,p.y,0,1,p.o,0,0)
+		spr(9+p.p//7,p.x,p.y,0,1,p.o,0,0)
 	elseif p.vy > 0 then
 		spr(6,p.x,p.y,0,1,p.o,0,0)			 -- landing
 	elseif p.vy<0 then
