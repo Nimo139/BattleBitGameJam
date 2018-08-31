@@ -68,6 +68,21 @@ end
 
 
 
+function respawn()
+	p.x=0
+	--p.y=100
+	p.o= 0
+	y = 128             
+	while solid(0,y) do   -- respawn on the first solid block
+		y = y - 8
+	end
+	p.y = y
+	
+	
+end
+
+
+
 --function lerp(a,b,t) return (1-t)*a + t*b end
 	
 
@@ -155,8 +170,7 @@ function TIC()
 	
 	-- respawn if p under map 
 	if p.y > 200 then
-		p.x=20
-		p.y=100
+		respawn()
 	end
 	
 	-- switch to next room 
