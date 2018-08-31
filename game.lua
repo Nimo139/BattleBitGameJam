@@ -215,4 +215,7 @@ function TIC()
 		spr(64,w.x,w.y,0,1,w.x//9%4,0,0)
 	end	
 	
+	if inRoomNr == 1 then
+		music (0,0,47,true)
+	end
 end
