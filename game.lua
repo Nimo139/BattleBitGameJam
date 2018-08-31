@@ -141,6 +141,16 @@ function throwWool()
 
 end
 
+
+function respawnWool()
+	w.x=8
+	y = 128             
+	while solid(0,y) do   -- respawn on the first solid block
+		y = y - 8
+	end
+	w.y = y
+end
+
 -- WOOL END
 
 -- MUSIC
@@ -226,6 +236,11 @@ function TIC()
 		p.p = 14
 	end
 	woolUpdate()
+	
+	if keyp(18) then
+		respawnWool()
+	end
+	
 	
 	
     cls()
