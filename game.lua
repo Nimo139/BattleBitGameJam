@@ -238,6 +238,7 @@ function TIC()
 	end
 	woolUpdate()
 	
+	--Respawn wool if stuck
 	if keyp(18) then
 		respawnWool()
 	end
