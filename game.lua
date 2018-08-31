@@ -10,7 +10,8 @@ function init()
 		vx=0, --Velocity X
 		vy=0, --Velocity Y
 		o =0, --orientation
-		f =0, --falling		
+		f =0, --falling
+		p =0, --punch
 	}
 	
 	w={
@@ -97,10 +98,10 @@ end
 	
 -- vector from cat to wool 
 function throwWool()
-
+	
 	w.vx = (w.x-p.x)/2
 	w.vy = -3 --(w.y-p.y)
-	
+	p.p = 30
 
 end
 
@@ -180,6 +181,8 @@ function TIC()
 	dis = math.sqrt((w.x-p.x)^2 + (w.y-p.y)^2 ) 
 	if keyp(4) and dis < 16 then 
 		throwWool()
+	elseif keyp(4) and p.p ==  0 then 
+		p.p = 30
 	end
 	woolUpdate()
 	
@@ -199,7 +202,10 @@ function TIC()
 	
 	
 	-- cat animations 
-	if p.vy > 0 then
+	if p.p > 0 then
+		p.p = p.p -1 
+		spr(9+p.p//15,p.x,p.y,0,1,p.o,0,0)
+	elseif p.vy > 0 then
 		spr(6,p.x,p.y,0,1,p.o,0,0)			 -- landing
 	elseif p.vy<0 then
 		spr(5,p.x,p.y,0,1,p.o,0,0)           -- jumping 
