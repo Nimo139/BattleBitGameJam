@@ -49,7 +49,7 @@ end
 
 -- is block id solid?
 function isSolid(id)
-	return id >= 32 and id <= 79   -- #032-#079: Solid
+	return id >= 32 and id <= 79  --#032-#079: Solid
 end
 
 -- is a block at x,y solid? (actual map view)
@@ -200,13 +200,13 @@ function TIC()
 	
 	-- cat animations 
 	if p.vy > 0 then
-		spr(6,p.x,p.y,0,1,p.o,0,0)
+		spr(6,p.x,p.y,0,1,p.o,0,0)			 -- landing
 	elseif p.vy<0 then
-		spr(5,p.x,p.y,0,1,p.o,0,0)
+		spr(5,p.x,p.y,0,1,p.o,0,0)           -- jumping 
 	elseif p.vx==0 then
-		spr(2+t%80//40*2,p.x,p.y,0,1,p.o,0,0)
+		spr(7+t%80//40,p.x,p.y,0,1,p.o,0,0)  -- standing sp 7-8
 	else
-		spr(1+t%20//10*2,p.x,p.y,0,1,p.o,0,0)
+		spr(1+t%40//10,p.x,p.y,0,1,p.o,0,0)  --running sp 1-4
 	end
 	
 	
