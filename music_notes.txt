@@ -1,0 +1,10 @@
+Track 01	Pattern 01	Beginning1
+		Pattern 02	Beginning2
+		Pattern 03	Lead1
+		Pattern 04	<empty>
+		Pattern 05	<empty>
+		Pattern 06	Bass1
+		Pattern 07	Bass2
+		Pattern 08	<empty>
+		Pattern 09	Lead2
+		Pattern 10	Noise1
