@@ -121,6 +121,12 @@ function throwWool()
 end
 
 -- WOOL END
+
+-- MUSIC
+
+music (0,0,47,true)
+
+-- MUSIC END
 	
 init()
 function TIC()
@@ -236,7 +242,7 @@ function TIC()
 	end	
 	
 	-- music stuff
-	if inRoomNr == 1 then
-		music (0,0,47,true)
-	end
+--	if inRoomNr == 1 then
+--		music (0,0,47,true)
+--	end
 end
