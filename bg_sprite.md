@@ -12,9 +12,9 @@
 |	6	|	Katze landet                        	|
 |	7	|	Katze Stehen 1                      	|
 |	8	|	Katze Stehen 2                       	|
-|	9	|	                                      	|
-|	10	|	                                      	|
-|	11	|	                                      	|
+|	9	|	Katze Punch 1                       	|
+|	10	|	 Katze Punch 2                       	|
+|	11	|	                         	|
 |	12	|	                                      	|
 |	13	|	                                      	|
 |	14	|	                                      	|
