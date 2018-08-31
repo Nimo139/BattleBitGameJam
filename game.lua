@@ -134,16 +134,17 @@ end
 	
 -- vector from cat to wool 
 function throwWool()
-	
-	w.vx = (w.x-p.x)/2
-	w.vy = -3 --(w.y-p.y)
-	p.p = 14
-
+	if inRoomNr == w.room then
+		w.vx = (w.x-p.x)/2
+		w.vy = -3 --(w.y-p.y)
+		p.p = 14
+	end
 end
 
 
 function respawnWool()
 	w.x=8
+	w.vy = 0
 	y = 128             
 	while solid(0,y) do   -- respawn on the first solid block
 		y = y - 8
@@ -221,9 +222,9 @@ function TIC()
 	
 	
 	-- wool left/right?
-    if woolRight(p.x,p.y) then
+    if woolRight(p.x,p.y) and inRoomNr == w.room then
         w.vx=1
-    elseif woolLeft(p.x,p.y) then
+    elseif woolLeft(p.x,p.y) and inRoomNr == w.room  then
         w.vx=-1
     else  
 		w.vx= w.vx - w.vx/10
