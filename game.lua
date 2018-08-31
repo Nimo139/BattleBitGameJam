@@ -152,6 +152,17 @@ function respawnWool()
 	w.y = y
 end
 
+function darwWoolString(x, y)
+	for i = x,w.x,1 do 
+		y = 128             
+		while solid(i,y) do   -- respawn on the first solid block
+			y = y - 8
+		end
+		spr(68,i,y,0,1,0,0,0)
+	end
+end
+
+
 -- WOOL END
 
 -- MUSIC
@@ -278,6 +289,8 @@ function TIC()
 	if w.room == inRoomNr then 
 		spr(64,w.x,w.y,0,1,w.x//9%4,0,0)
 	end	
+	
+	darwWoolString(0, 120)
 	
 	-- music stuff
 --	if inRoomNr == 1 then
