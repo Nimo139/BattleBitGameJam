@@ -99,7 +99,7 @@ end
 function throwWool()
 
 	w.vx = (w.x-p.x)/2
-	w.vy = (w.y-p.y)-3
+	w.vy = -3 --(w.y-p.y)
 	
 
 end
