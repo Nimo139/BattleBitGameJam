@@ -153,12 +153,24 @@ function respawnWool()
 end
 
 function darwWoolString(x, y)
+	if w.room == inRoomNr then
+		tox = w.x
+	elseif w.room > inRoomNr then
+		tox = 240
+	else 
+		tox = -1 
+	end
+	
+	while solid(x,y) do   -- the first solid block
+		y = y - 8
+	end
+	
 	ox = x
 	oy = y
 	
-	for i = x,w.x,8 do 
+	for i = x,tox,8 do 
 		y = 128             
-		while solid(i,y) do   -- respawn on the first solid block
+		while solid(i,y) or solid(i-1,y) do   -- the first solid block
 			y = y - 8
 		end
 		line(ox,oy+7,i,y+7,68)
@@ -168,7 +180,10 @@ function darwWoolString(x, y)
 		--spr(68,i,y,0,1,0,0,0)
 		x=i
 	end
-	line(x,y+7,w.x,w.y+7,68)
+	
+	if w.room == inRoomNr then
+		line(x,y+7,w.x,w.y+7,68)
+	end
 end
 
 
