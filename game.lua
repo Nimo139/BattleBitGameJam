@@ -321,8 +321,8 @@ function TIC()
 --		music (0,0,47,true)
 --	end
 
-	if inRoomNr == 2 then
-		music ()
-	end
+--	if inRoomNr == 2 then
+--		music ()
+--	end
 
 end
