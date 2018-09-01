@@ -29,7 +29,7 @@ function init()
 	btn0released = true
 	
 	
-	inRoomNr = 1 
+	inRoomNr = 64 
 	rooms = {}
 	for y = 0,136-17,17 do
 		for x = 0,240-30,30 do
@@ -54,9 +54,15 @@ function isSolid(id)
 end
 
 -- is a block at x,y solid? (actual map view)
+-- ich musste das zu testzwecken auskommentieren, da collision in raum64 nicht funktioniert? es nutzt jetzt überall raum 1 zur abfrage!
+
 function solid(x,y)
-    return isSolid(mget2((x)//8,(y)//8, inRoomNr))
+    return isSolid(mget2((x)//8,(y)//8, 1))
 end
+
+--function solid(x,y)
+--    return isSolid(mget2((x)//8,(y)//8, inRoomNr))
+--end
 
 function solidInRoom(x,y, room)
     return isSolid(mget2((x)//8,(y)//8, room))
@@ -191,7 +197,7 @@ end
 
 -- MUSIC
 
-music (0,0,47,true)
+music (1,0,7,false)
 
 -- MUSIC END
 	
@@ -247,12 +253,15 @@ function TIC()
 	end
 	
 	-- switch to next room 
-	if p.x > 240 then 
+	if p.x > 240 and inRoomNr < 64 then 
 		p.x = 0
 		inRoomNr = inRoomNr + 1
 	elseif p.x < 0 and inRoomNr > 1 then
 		p.x = 232
 		inRoomNr = inRoomNr - 1
+	elseif p.x > 240 and inRoomNr == 64 then
+		p.x = 0
+		inRoomNr = 1
 	end 
 	
 	
@@ -317,12 +326,13 @@ function TIC()
 	darwWoolString(0, 120)
 	
 	-- music stuff
---	if inRoomNr == 1 then
---		music (0,0,47,true)
---	end
-
---	if inRoomNr == 2 then
---		music ()
---	end
+	
+	if inRoomNr == 63 then
+		music ()
+	end
+	
+	if inRoomNr == 1 then
+		music (0,0,47,true)
+	end
 
 end
