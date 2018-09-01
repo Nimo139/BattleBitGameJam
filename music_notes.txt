@@ -1,3 +1,24 @@
+SFX		00		Lead (Pulse 1)
+		01		Lead (Pulse 1) Pitch Slide Up
+		02		Saw
+		03		Hat
+		04		Kick
+		05		Arp058
+		06		Arp047
+		07		Arp049
+		08		Arp058 fade
+		09		Arp038
+		10		Arp039
+		11		Arp036
+		12		Arp039 fade
+		13		Triangle
+		14		Square
+		15		Lead (Pulse 1) Vibrato
+		16		Lead (Pulse 1) Vibrato fade
+		17		Crash
+		18		RevCrash
+		19		Snare
+
 Track 01	Pattern 01	Beginning1
 		Pattern 02	Beginning2
 		Pattern 03	Lead1
@@ -26,18 +47,12 @@ Track 01	Pattern 01	Beginning1
 		Pattern 26	Beginning3
 		Pattern 27	Beginning4
 
-SFX		00		Lead (Pulse 1)
-		01		Lead (Pulse 1) Pitch Slide Up
-		02		Saw
-		03		Hat
-		04		Kick
-		05		Arp058
-		06		Arp047
-		07		Arp049
-		08		Arp058 fade
-		09		Arp038
-		10		Arp039
-		11		Arp036
-		12		Arp039 fade
-		13		Triangle
-		14		Square
+Track02		Pattern 28	Beginning1
+		Pattern 29	Beginning2
+		Pattern 30	Beginning3
+		Pattern 31	Beginning4
+		Pattern 32	TriBass
+		Pattern 33	BeginningTriEnd + Snare
+		Pattern 34	Crash
+		Pattern 35	Noise1
+		Pattern 36	Snare
