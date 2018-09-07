@@ -29,7 +29,7 @@ function init()
 	btn0released = true
 	
 	
-	inRoomNr = 64 
+	inRoomNr = 64
 	rooms = {}
 	for y = 0,136-17,17 do
 		for x = 0,240-30,30 do
@@ -44,7 +44,7 @@ end
 
 -- mget recalculation for rooms 
 function mget2(x,y, room)
-	return mget(x+30*(room-1),y)
+	return mget(x+30*((room-1)%8), y + 17*((room-1)//8))
 end
 
 
@@ -57,7 +57,7 @@ end
 -- ich musste das zu testzwecken auskommentieren, da collision in raum64 nicht funktioniert? es nutzt jetzt überall raum 1 zur abfrage!
 
 function solid(x,y)
-    return isSolid(mget2((x)//8,(y)//8, 1))
+    return isSolid(mget2((x)//8,(y)//8, inRoomNr))
 end
 
 --function solid(x,y)
@@ -293,8 +293,8 @@ function TIC()
     --map(0,0,30,17)
 	map(rget(inRoomNr))
     --rect(p.x,p.y,8,8,15)
-	print(math.abs(p.x-7-w.x),84,84)
-	print(p.x,120,84)
+	print(((inRoomNr-1)%8),84,84)
+	print(((inRoomNr-1)//8),120,84)
 	t=t+1
 	
 
