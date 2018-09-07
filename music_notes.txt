@@ -56,3 +56,10 @@ Track02		Pattern 28	Beginning1
 		Pattern 34	Crash
 		Pattern 35	Noise1
 		Pattern 36	Snare
+		Pattern 37	Lead1
+		Pattern 38	Lead2
+		Pattern 39	Lead3
+		Pattern 40	Lead4
+		Pattern 41	Lead4b
+		Pattern 42	BassFade
+		Pattern 43	LeadFade
