@@ -74,6 +74,20 @@ Track03		Pattern 44	Bass1
 		Pattern 53	Tri+Bass4
 		Pattern 54	Lead2
 
+Track04		Pattern 03	Lead1
+		Pattern 06	Bass1
+		Pattern 07	Bass2
+		Pattern 09	Lead2
+		Pattern 10	Noise1
+		Pattern 34	Crash
+		Pattern 36	Snare
+		Pattern 44	Bass1
+		Pattern 24	SawBridge4
+		Pattern 39	Lead3
+		Pattern 40	Lead4
+		Pattern 41	Lead4b
+		Pattern 51	Tri+Bass3
+
 		Pattern 48	empty
 		Pattern 50	empty
 		Pattern 55	empty
