@@ -79,6 +79,10 @@ Track04		Pattern 03	Lead1
 		Pattern 07	Bass2
 		Pattern 09	Lead2
 		Pattern 10	Noise1
+		Pattern 11	Bass3
+		Pattern 13	Bass4
+		Pattern 15	SquareLead1
+		Pattern 17	SquareLead3
 		Pattern 34	Crash
 		Pattern 36	Snare
 		Pattern 44	Bass1
