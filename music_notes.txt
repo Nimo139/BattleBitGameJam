@@ -63,3 +63,22 @@ Track02		Pattern 28	Beginning1
 		Pattern 41	Lead4b
 		Pattern 42	BassFade
 		Pattern 43	LeadFade
+
+Track03		Pattern 44	Bass1
+		Pattern 45	Noise1
+		Pattern 46	Tri+Bass1
+		Pattern 47	Noise2
+		Pattern 49	Tri+Bass2
+		Pattern 51	Tri+Bass3
+		Pattern 52	Lead1
+		Pattern 53	Tri+Bass4
+		Pattern 54	Lead2
+
+		Pattern 48	empty
+		Pattern 50	empty
+		Pattern 55	empty
+		Pattern 56	empty
+		Pattern 57	empty
+		Pattern 58	empty
+		Pattern 59	empty
+		Pattern 60	empty
