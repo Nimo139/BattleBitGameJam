@@ -9,7 +9,7 @@ mode=mode_menu
 function init()
     --solids={[2]=true,[3]=true}
 	levelCounter = 0
-	
+	music (1,0,7,false)
 	p={
 	x=0,
 	y=0,
@@ -199,7 +199,7 @@ function mainMenu()
 
 	print("press (B) button or [X] key!",50,110,14)
 
-	music (1,0,7,false)
+
 	if btnp(5) then
 		init()
 		mode=mode_prelevel
@@ -221,7 +221,7 @@ function prelevel()
 	initHold = true
 	end
 	
-	if holdTheLine == 200 then
+	if holdTheLine == 100 then
 	p={
 		x=20,
 		y=100,
@@ -243,14 +243,13 @@ function prelevel()
 	
 	setRoomNr(currentRoom+1)
 	mode=mode_level
+	music (0,0,47,true)
 	else
 		holdTheLine = holdTheLine + 1
 	end
 end
 
 function level()
-
-	music (0,0,47,true)
 
 	-- button left/right
     if btn(2) then 
