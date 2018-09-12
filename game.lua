@@ -197,8 +197,9 @@ end
 
 function mainMenu()
 
-	print("press (B) button or [X] key!",50,110,14)
-
+	print("press X!",100,110,14)
+	print("Ver 0.2",0,130,1,true,1,true)
+	print("by BotA, kleeder and Nimo",105,130,1)
 
 	if btnp(5) then
 		init()
