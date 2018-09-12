@@ -1,33 +1,31 @@
+t = 0
+mode_menu = 1
+mode_prelevel = 2
+mode_level = 3
+mode_pause = 4
+mode=mode_menu
+
+
 function init()
     --solids={[2]=true,[3]=true}
+	levelCounter = 0
 	
-	t = 0
-	
-	-- cat fields
 	p={
-		x=20,
-		y=100,
-		vx=0, --Velocity X
-		vy=0, --Velocity Y
-		o =0, --orientation
-		f =0, --falling
-		p =0, --punch
+	x=0,
+	y=0,
+	vx=0, --Velocity X
+	vy=0, --Velocity Y
+	o =0, --orientation
+	f =0, --falling
+	p =0, --punch
 	}
 	
-	w={
-		x = 28,
-		y = 100,
-		vx= 0,
-		vy= 0,
-		r = 0,
-		room = 1,
-	}
-		
+	initHold = false
+	
 	--cam={x=120,y=68}
 	
 	--Jumping physics
 	btn0released = true
-	
 	
 	inRoomNr = 64
 	rooms = {}
@@ -47,6 +45,9 @@ function mget2(x,y, room)
 	return mget(x+30*((room-1)%8), y + 17*((room-1)//8))
 end
 
+function setRoomNr(roomNr)
+	inRoomNr = roomNr
+end
 
 -- is block id solid?
 function isSolid(id)
@@ -192,17 +193,64 @@ function darwWoolString(x, y)
 	end
 end
 
-
 -- WOOL END
 
--- MUSIC
+function mainMenu()
 
-music (1,0,7,false)
+	print("press (B) button or [X] key!",50,110,14)
 
--- MUSIC END
+	music (1,0,7,false)
+	if btnp(5) then
+		init()
+		mode=mode_prelevel
+		music()
+		return
+	end
+end
 	
-init()
-function TIC()
+function prelevel()
+
+	if levelCounter == 0 then
+		setRoomNr(1)
+	end
+
+	currentRoom = inRoomNr
+	
+	if initHold == false then
+	holdTheLine = 0
+	initHold = true
+	end
+	
+	if holdTheLine == 200 then
+	p={
+		x=20,
+		y=100,
+		vx=0, --Velocity X
+		vy=0, --Velocity Y
+		o =0, --orientation
+		f =0, --falling
+		p =0, --punch
+	}
+	
+	w={
+		x = 28,
+		y = 100,
+		vx= 0,
+		vy= 0,
+		r = 0,
+		room = currentRoom+1,
+	}
+	
+	setRoomNr(currentRoom+1)
+	mode=mode_level
+	else
+		holdTheLine = holdTheLine + 1
+	end
+end
+
+function level()
+
+	music (0,0,47,true)
 
 	-- button left/right
     if btn(2) then 
@@ -287,17 +335,6 @@ function TIC()
 		respawnWool()
 	end
 	
-	
-	
-    cls()
-    --map(0,0,30,17)
-	map(rget(inRoomNr))
-    --rect(p.x,p.y,8,8,15)
-	print(((inRoomNr-1)%8),84,84)
-	print(((inRoomNr-1)//8),120,84)
-	t=t+1
-	
-
 	--cam.x=math.min(120,lerp(cam.x,120-p.x,0.05))
 	--cam.y=math.min(64,lerp(cam.y,64-p.y,0.05))
 	--map(0,0,240,136,-cam.x,-cam.y)
@@ -324,15 +361,31 @@ function TIC()
 	end	
 	
 	darwWoolString(0, 120)
+end
 	
-	-- music stuff
-	
-	if inRoomNr == 63 then
-		music ()
+
+function TIC()
+
+    cls()
+    --map(0,0,30,17)
+	map(rget(inRoomNr))
+    --rect(p.x,p.y,8,8,15)
+	print(((inRoomNr-1)%8),84,84)
+	print(((inRoomNr-1)//8),120,84)
+
+	if mode==mode_menu then
+		mainMenu()
+	elseif mode==mode_prelevel then
+		prelevel()
+	elseif mode==mode_level then
+		level()
+	elseif mode==mode_pause then
+		pause()
 	end
-	
-	if inRoomNr == 1 then
-		music (0,0,47,true)
+	if mode ~= mode_pause then
+		t=t+1
 	end
 
 end
+
+init()
