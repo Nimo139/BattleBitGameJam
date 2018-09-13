@@ -371,12 +371,11 @@ function level()
     end
     
 	--Jumping 
-    if p.vy == 0 and btn(0) and btn0released then 
+    if p.vy == 0 and btn(5) and btn0released then 
 		p.vy=-2.5 
 		btn0released = false  -- no permanent jumping
-		
 	end
-	btn0released = not btn(0)
+	btn0released = not btn(5)
 		
 	
 	-- ceiling check 
@@ -427,15 +426,15 @@ function level()
 	end
 	
 	dis = math.sqrt((w.x-p.x)^2 + (w.y-p.y)^2 ) 
-	if keyp(4) and dis < 16 then 
+	if btnp(4) and dis < 16 then 
 		throwWool()
-	elseif keyp(4) and p.p ==  0 then 
+	elseif btnp(4) and p.p ==  0 then 
 		p.p = 14
 	end
 	woolUpdate()
 	
 	--Respawn wool if stuck
-	if keyp(18) then
+	if btnp(6) then
 		respawnWool()
 	end
 	
@@ -497,12 +496,12 @@ function TIC()
 		t=t+1		
 	end
 
-	if btnp(6) and mode == mode_level then
+	if btnp(7) and mode == mode_level then
 		mode=mode_pause
 		prev_room = inRoomNr
 		setRoomNr(42)
 	elseif mode==mode_pause then
-		if btnp(6) then
+		if btnp(7) then
 		setRoomNr(prev_room)
 		mode=mode_level
 		end
