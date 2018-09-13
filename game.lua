@@ -511,6 +511,7 @@ function TIC()
 -- DEBUG PRINTS
 
 --print(inRoomNr,84,84)
+print(t,84,84)
 --print(((inRoomNr-1)%8),84,84)
 --print(((inRoomNr-1)//8),120,84)
 	
