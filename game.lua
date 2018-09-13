@@ -118,7 +118,22 @@ function woolUpdate()
 
 	
 	-- switch to next room 
-	if w.x > 240 then 
+	if w.x < 0 and w.room == 2 then
+		w.x = 0
+		w.room = w.room
+	elseif w.x < 0 and w.room == 10 then
+		w.x = 0
+		w.room = w.room
+	elseif w.x < 0 and w.room == 18 then
+		w.x = 0
+		w.room = w.room
+	elseif w.x < 0 and w.room == 26 then
+		w.x = 0
+		w.room = w.room
+	elseif w.x < 0 and w.room == 34 then
+		w.x = 0
+		w.room = w.room
+	elseif w.x > 240 then 
 		w.x = w.x - 240
 		w.room = w.room + 1
 	elseif w.x < 0 and w.room > 1 then
