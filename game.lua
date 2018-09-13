@@ -78,6 +78,16 @@ function woolLeft(x,y)
 	return (math.abs(p.x-7-w.x)<0.5 and math.abs(p.y-w.y)<0.5)
 end
 
+function woolInGoal(x,y)
+	if mget2((x)//8,(y)//8, w.room) == 133 then 
+		--set wool state to small/ fix pos -> end
+		print("Level cleard",100,60)
+		spr(134, x, y, -1, 1, 0, 0, 1, 1)
+		w.size = 3
+		w.goal = true
+		line(x ,y+7 ,x+3,y+2,68)
+	end
+end
 
 
 function respawn()
@@ -131,10 +141,15 @@ function woolUpdate()
 		w.vx = 0
 	end
 	
-	w.x=w.x+w.vx
-    w.y=w.y+w.vy
 	
-
+		
+	if w.goal == false then 
+		w.x=w.x+w.vx
+		w.y=w.y+w.vy
+	end
+	
+	--needel
+	woolInGoal(w.x,w.y)
 	
 	
 end	
@@ -240,6 +255,8 @@ function prelevel()
 		vy= 0,
 		r = 0,
 		room = currentRoom+1,
+		goal = false,
+		size = 0,
 	}
 	
 	setRoomNr(currentRoom+1)
@@ -357,7 +374,7 @@ function level()
 	
 	-- wool animations
 	if w.room == inRoomNr then 
-		spr(64,w.x,w.y,0,1,w.x//9%4,0,0)
+		spr(64 +  w.size ,w.x,w.y,0,1,w.x//9%4,0,0)
 	end	
 	
 	darwWoolString(0, 120)
