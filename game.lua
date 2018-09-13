@@ -296,6 +296,7 @@ function prelevel()
 		levelCounter = 0
 		setRoomNr(41)
 		mode=mode_done
+		music (5,0,63,false)
 		return
 	end
 	
@@ -307,30 +308,36 @@ function prelevel()
 	end
 	
 	if holdTheLine == 100 then
-	p={
-		x=20,
-		y=100,
-		vx=0, --Velocity X
-		vy=0, --Velocity Y
-		o =0, --orientation
-		f =0, --falling
-		p =0, --punch
-	}
-	
-	w={
-		x = 28,
-		y = 100,
-		vx= 0,
-		vy= 0,
-		r = 0,
-		room = currentRoom+1,
-		goal = false,
-		size = 0,
-	}
-	
-	setRoomNr(currentRoom+1)
-	mode=mode_level
-	music (0,0,47,true)
+		p={
+			x=20,
+			y=100,
+			vx=0, --Velocity X
+			vy=0, --Velocity Y
+			o =0, --orientation
+			f =0, --falling
+			p =0, --punch
+		}
+		
+		w={
+			x = 28,
+			y = 100,
+			vx= 0,
+			vy= 0,
+			r = 0,
+			room = currentRoom+1,
+			goal = false,
+			size = 0,
+		}
+		
+		setRoomNr(currentRoom+1)
+		mode=mode_level
+		if levelCounter == 4 then
+		music (3,15,63,true)
+		elseif levelCounter == 3 then
+		music (2,4,63,true)
+		else
+		music (0,0,47,true)
+		end
 	else
 		holdTheLine = holdTheLine + 1
 	end

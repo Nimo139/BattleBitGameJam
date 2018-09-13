@@ -19,7 +19,7 @@ SFX		00		Lead (Pulse 1)
 		18		RevCrash
 		19		Snare
 
-Track 01	Pattern 01	Beginning1
+Track00		Pattern 01	Beginning1
 		Pattern 02	Beginning2
 		Pattern 03	Lead1
 		Pattern 04	Arps1
@@ -47,7 +47,7 @@ Track 01	Pattern 01	Beginning1
 		Pattern 26	Beginning3
 		Pattern 27	Beginning4
 
-Track02		Pattern 28	Beginning1
+Track01		Pattern 28	Beginning1
 		Pattern 29	Beginning2
 		Pattern 30	Beginning3
 		Pattern 31	Beginning4
@@ -64,7 +64,7 @@ Track02		Pattern 28	Beginning1
 		Pattern 42	BassFade
 		Pattern 43	LeadFade
 
-Track03		Pattern 44	Bass1
+Track02		Pattern 44	Bass1
 		Pattern 45	Noise1
 		Pattern 46	Tri+Bass1
 		Pattern 47	Noise2
@@ -74,7 +74,7 @@ Track03		Pattern 44	Bass1
 		Pattern 53	Tri+Bass4
 		Pattern 54	Lead2
 
-Track04		Pattern 03	Lead1
+Track03		Pattern 03	Lead1
 		Pattern 06	Bass1
 		Pattern 07	Bass2
 		Pattern 09	Lead2
@@ -91,6 +91,10 @@ Track04		Pattern 03	Lead1
 		Pattern 40	Lead4
 		Pattern 41	Lead4b
 		Pattern 51	Tri+Bass3
+
+Track04		Pattern 03	Lead1
+
+Track05		Pattern	09	Lead2
 
 		Pattern 48	empty
 		Pattern 50	empty
