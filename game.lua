@@ -229,7 +229,7 @@ end
 
 function mainMenu()
 
-	print("press X!",100,110,14)
+	print("Press Start!",80,110,14)
 	print("Ver 0.3",0,130,1,true,1,true)
 	print("by kleeder, Nimo, BotA and alili1996",25,95,12)
 
@@ -308,6 +308,37 @@ function prelevel()
 	end
 	
 	if holdTheLine == 100 then
+		p={
+			x=20,
+			y=100,
+			vx=0, --Velocity X
+			vy=0, --Velocity Y
+			o =0, --orientation
+			f =0, --falling
+			p =0, --punch
+		}
+		
+		w={
+			x = 28,
+			y = 100,
+			vx= 0,
+			vy= 0,
+			r = 0,
+			room = currentRoom+1,
+			goal = false,
+			size = 0,
+		}
+		
+		setRoomNr(currentRoom+1)
+		mode=mode_level
+		if levelCounter == 4 then
+		music (3,15,63,true)
+		elseif levelCounter == 3 then
+		music (2,4,63,true)
+		else
+		music (0,0,47,true)
+		end
+	elseif btnp(5) then
 		p={
 			x=20,
 			y=100,
