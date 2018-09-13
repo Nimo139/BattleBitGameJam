@@ -92,14 +92,13 @@ Track03		Pattern 03	Lead1
 		Pattern 41	Lead4b
 		Pattern 51	Tri+Bass3
 
-Track04		Pattern 03	Lead1
+Track04		Pattern 48	Fanfare1
+		Pattern 50	Noise1
+		Pattern 55	Bass1
+		Pattern 56	empty
 
 Track05		Pattern	09	Lead2
 
-		Pattern 48	empty
-		Pattern 50	empty
-		Pattern 55	empty
-		Pattern 56	empty
 		Pattern 57	empty
 		Pattern 58	empty
 		Pattern 59	empty
