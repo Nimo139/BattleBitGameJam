@@ -3,6 +3,8 @@ mode_menu = 1
 mode_prelevel = 2
 mode_level = 3
 mode_pause = 4
+mode_clear = 5
+mode_done = 6
 mode=mode_menu
 
 
@@ -81,7 +83,7 @@ end
 function woolInGoal(x,y)
 	if mget2((x)//8,(y)//8, w.room) == 133 then 
 		--set wool state to small/ fix pos -> end
-		print("Level cleard",100,60)
+		print("Level cleared",100,60)
 		spr(134, x, y, -1, 1, 0, 0, 1, 1)
 		w.size = 3
 		w.goal = true
@@ -223,13 +225,64 @@ function mainMenu()
 		return
 	end
 end
+
+function clear_cutscene()
+
+	if initHold == false then
+	holdTheLine = 0
+	initHold = true
+	end
+	woolInGoal(w.x,w.y)
+	if holdTheLine == 200 then
+	initHold = false
+	mode=mode_prelevel
+	music ()
+	else
+		holdTheLine = holdTheLine + 1
+	end
+end
 	
+function game_done()
+
+	print("Congratz, you won the game ;D",10,10,14)
+	print("press X to continue!",100,110,14)
+	if btnp(5) then
+		mode=mode_menu
+		setRoomNr(64)
+		music (1,0,7,false)
+		return
+	end
+end
+
 function prelevel()
 
 	if levelCounter == 0 then
 		setRoomNr(1)
 	end
+	
+	if levelCounter == 1 then
+		setRoomNr(9)
+	end
+	
+	if levelCounter == 2 then
+		setRoomNr(17)
+	end
+	
+	if levelCounter == 3 then
+		setRoomNr(25)
+	end
+	
+	if levelCounter == 4 then
+		setRoomNr(33)
+	end
 
+	if levelCounter == 5 then
+		levelCounter = 0
+		setRoomNr(41)
+		mode=mode_done
+		return
+	end
+	
 	currentRoom = inRoomNr
 	
 	if initHold == false then
@@ -378,6 +431,13 @@ function level()
 	end	
 	
 	darwWoolString(0, 120)
+	
+	if w.goal == true then
+		initHold = false
+		levelCounter = levelCounter+1
+		mode=mode_clear
+		music (4,0,63,false)
+	end
 end
 	
 
@@ -398,6 +458,10 @@ function TIC()
 		level()
 	elseif mode==mode_pause then
 		pause()
+	elseif mode==mode_clear then
+		clear_cutscene()
+	elseif mode==mode_done then
+		game_done()
 	end
 	if mode ~= mode_pause then
 		t=t+1
