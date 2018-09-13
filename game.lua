@@ -371,17 +371,28 @@ function level()
 	end
 	
 	-- switch to next room 
-	if p.x > 240 and inRoomNr < 64 then 
+	if p.x < 0 and inRoomNr == 2 then
+		p.x = 0
+		inRoomNr = inRoomNr
+	elseif p.x < 0 and inRoomNr == 10 then
+		p.x = 0
+		inRoomNr = inRoomNr
+	elseif p.x < 0 and inRoomNr == 18 then
+		p.x = 0
+		inRoomNr = inRoomNr
+	elseif p.x < 0 and inRoomNr == 26 then
+		p.x = 0
+		inRoomNr = inRoomNr
+	elseif p.x < 0 and inRoomNr == 34 then
+		p.x = 0
+		inRoomNr = inRoomNr
+	elseif p.x > 240 and inRoomNr < 64 then 
 		p.x = 0
 		inRoomNr = inRoomNr + 1
 	elseif p.x < 0 and inRoomNr > 1 then
 		p.x = 232
 		inRoomNr = inRoomNr - 1
-	elseif p.x > 240 and inRoomNr == 64 then
-		p.x = 0
-		inRoomNr = 1
-	end 
-	
+	end
 	
 	-- wool left/right?
     if woolRight(p.x,p.y) and inRoomNr == w.room then
