@@ -215,8 +215,8 @@ end
 function mainMenu()
 
 	print("press X!",100,110,14)
-	print("Ver 0.2",0,130,1,true,1,true)
-	print("by BotA, kleeder, Nimo and alili1996",25,95,12)
+	print("Ver 0.3",0,130,1,true,1,true)
+	print("by kleeder, Nimo, BotA and alili1996",25,95,12)
 
 	if btnp(5) then
 		init()
@@ -250,6 +250,7 @@ function game_done()
 		mode=mode_menu
 		setRoomNr(64)
 		music (1,0,7,false)
+		t = 0
 		return
 	end
 end
