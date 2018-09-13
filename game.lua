@@ -216,7 +216,7 @@ function mainMenu()
 
 	print("press X!",100,110,14)
 	print("Ver 0.2",0,130,1,true,1,true)
-	print("by BotA, kleeder and Nimo",105,130,1)
+	print("by BotA, kleeder, Nimo and alili1996",25,95,12)
 
 	if btnp(5) then
 		init()
@@ -447,8 +447,6 @@ function TIC()
     --map(0,0,30,17)
 	map(rget(inRoomNr))
     --rect(p.x,p.y,8,8,15)
-	print(((inRoomNr-1)%8),84,84)
-	print(((inRoomNr-1)//8),120,84)
 
 	if mode==mode_menu then
 		mainMenu()
@@ -456,17 +454,32 @@ function TIC()
 		prelevel()
 	elseif mode==mode_level then
 		level()
-	elseif mode==mode_pause then
-		pause()
 	elseif mode==mode_clear then
 		clear_cutscene()
 	elseif mode==mode_done then
 		game_done()
 	end
 	if mode ~= mode_pause then
-		t=t+1
+		t=t+1		
 	end
 
+	if btnp(6) and mode == mode_level then
+		mode=mode_pause
+		prev_room = inRoomNr
+		setRoomNr(42)
+	elseif mode==mode_pause then
+		if btnp(6) then
+		setRoomNr(prev_room)
+		mode=mode_level
+		end
+	end
+	
+-- DEBUG PRINTS
+
+--print(inRoomNr,84,84)
+--print(((inRoomNr-1)%8),84,84)
+--print(((inRoomNr-1)//8),120,84)
+	
 end
 
 init()
