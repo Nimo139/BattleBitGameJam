@@ -118,19 +118,7 @@ function woolUpdate()
 
 	
 	-- switch to next room 
-	if w.x < 0 and w.room == 2 then
-		w.x = 0
-		w.room = w.room
-	elseif w.x < 0 and w.room == 10 then
-		w.x = 0
-		w.room = w.room
-	elseif w.x < 0 and w.room == 18 then
-		w.x = 0
-		w.room = w.room
-	elseif w.x < 0 and w.room == 26 then
-		w.x = 0
-		w.room = w.room
-	elseif w.x < 0 and w.room == 34 then
+	if w.x < 0 and w.room == 2 or w.x < 0 and w.room == 10 or w.x < 0 and w.room == 18 or w.x < 0 and w.room == 26 or w.x < 0 and w.room == 34 then
 		w.x = 0
 		w.room = w.room
 	elseif w.x > 240 then 
@@ -229,11 +217,11 @@ end
 
 function mainMenu()
 
-	print("Press Start!",80,110,14)
+	print("Press X!",95,110,14)
 	print("Ver 0.3",0,130,1,true,1,true)
 	print("by kleeder, Nimo, BotA and alili1996",25,95,12)
 
-	if btnp(5) then
+	if btnp(5) or keyp(24) then
 		init()
 		mode=mode_prelevel
 		music()
@@ -261,7 +249,7 @@ function game_done()
 
 	print("Congratz, you won the game ;D",10,10,14)
 	print("press X to continue!",100,110,14)
-	if btnp(5) then
+	if btnp(5) or keyp(24) then
 		mode=mode_menu
 		setRoomNr(64)
 		music (1,0,7,false)
@@ -338,7 +326,7 @@ function prelevel()
 		else
 		music (0,0,47,true)
 		end
-	elseif btnp(5) then
+	elseif btnp(5) or keyp(24) then
 		p={
 			x=20,
 			y=100,
@@ -402,7 +390,7 @@ function level()
     end
     
 	--Jumping 
-    if p.vy == 0 and btn(5) and btn0released then 
+    if p.vy == 0 and btnp(5) and btn0released or p.vy == 0 and keyp(58) and btn0released then 
 		p.vy=-2.5 
 		btn0released = false  -- no permanent jumping
 	end
@@ -424,19 +412,7 @@ function level()
 	end
 	
 	-- switch to next room 
-	if p.x < 0 and inRoomNr == 2 then
-		p.x = 0
-		inRoomNr = inRoomNr
-	elseif p.x < 0 and inRoomNr == 10 then
-		p.x = 0
-		inRoomNr = inRoomNr
-	elseif p.x < 0 and inRoomNr == 18 then
-		p.x = 0
-		inRoomNr = inRoomNr
-	elseif p.x < 0 and inRoomNr == 26 then
-		p.x = 0
-		inRoomNr = inRoomNr
-	elseif p.x < 0 and inRoomNr == 34 then
+	if p.x < 0 and inRoomNr == 2 or p.x < 0 and inRoomNr == 10 or p.x < 0 and inRoomNr == 18 or p.x < 0 and inRoomNr == 26 or p.x < 0 and inRoomNr == 34 then
 		p.x = 0
 		inRoomNr = inRoomNr
 	elseif p.x > 240 and inRoomNr < 64 then 
@@ -457,15 +433,15 @@ function level()
 	end
 	
 	dis = math.sqrt((w.x-p.x)^2 + (w.y-p.y)^2 ) 
-	if btnp(4) and dis < 16 then 
+	if btnp(4) and dis < 16 or keyp(4) and dis < 16 then 
 		throwWool()
-	elseif btnp(4) and p.p ==  0 then 
+	elseif btnp(4) and p.p ==  0 or keyp(4) and p.p ==  0 then 
 		p.p = 14
 	end
 	woolUpdate()
 	
 	--Respawn wool if stuck
-	if btnp(6) then
+	if btnp(6) or keyp(18) then
 		respawnWool()
 	end
 	
@@ -527,12 +503,12 @@ function TIC()
 		t=t+1		
 	end
 
-	if btnp(7) and mode == mode_level then
+	if btnp(7) and mode == mode_level or keyp(1) and mode == mode_level  then
 		mode=mode_pause
 		prev_room = inRoomNr
 		setRoomNr(42)
 	elseif mode==mode_pause then
-		if btnp(7) then
+		if btnp(7) or keyp(1) then
 		setRoomNr(prev_room)
 		mode=mode_level
 		end
