@@ -110,7 +110,29 @@ end
 
 --function lerp(a,b,t) return (1-t)*a + t*b end
 	
-
+	
+function resetLevel(levelCounter)
+	if levelCounter == 0 then
+		setRoomNr(2)
+	end
+	
+	if levelCounter == 1 then
+		setRoomNr(10)
+	end
+	
+	if levelCounter == 2 then
+		setRoomNr(18)
+	end
+	
+	if levelCounter == 3 then
+		setRoomNr(26)
+	end
+	
+	if levelCounter == 4 then
+		setRoomNr(34)
+	end
+end
+	
 --WOOL
 	
 	
@@ -171,6 +193,7 @@ end
 
 
 function respawnWool()
+	w.room = inRoomNr
 	w.x=28
 	w.vy = 0
 	y = 128             
@@ -412,6 +435,7 @@ function level()
 	
 	--Reset Level if Stuck
 	if btnp(6) or keyp(18) then
+		resetLevel(levelCounter)
 		respawnWool()
 		respawn()
 	end
