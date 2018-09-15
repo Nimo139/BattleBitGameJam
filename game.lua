@@ -94,7 +94,7 @@ end
 
 
 function respawn()
-	p.x=0
+	p.x=20
 	--p.y=100
 	p.o= 0
 	y = 128             
@@ -171,7 +171,7 @@ end
 
 
 function respawnWool()
-	w.x=8
+	w.x=28
 	w.vy = 0
 	y = 128             
 	while solid(0,y) do   -- respawn on the first solid block
@@ -296,38 +296,7 @@ function prelevel()
 	initHold = true
 	end
 	
-	if holdTheLine == 100 then
-		p={
-			x=20,
-			y=100,
-			vx=0, --Velocity X
-			vy=0, --Velocity Y
-			o =0, --orientation
-			f =0, --falling
-			p =0, --punch
-		}
-		
-		w={
-			x = 28,
-			y = 100,
-			vx= 0,
-			vy= 0,
-			r = 0,
-			room = currentRoom+1,
-			goal = false,
-			size = 0,
-		}
-		
-		setRoomNr(currentRoom+1)
-		mode=mode_level
-		if levelCounter == 4 then
-		music (3,15,63,true)
-		elseif levelCounter == 3 then
-		music (2,4,63,true)
-		else
-		music (0,0,47,true)
-		end
-	elseif btnp(5) or keyp(24) then
+	if holdTheLine == 100 or btnp(5) or keyp(24) then
 		p={
 			x=20,
 			y=100,
@@ -441,9 +410,10 @@ function level()
 	end
 	woolUpdate()
 	
-	--Respawn wool if stuck
+	--Reset Level if Stuck
 	if btnp(6) or keyp(18) then
 		respawnWool()
+		respawn()
 	end
 	
 	--cam.x=math.min(120,lerp(cam.x,120-p.x,0.05))
@@ -504,12 +474,12 @@ function TIC()
 		t=t+1		
 	end
 
-	if btnp(7) and mode == mode_level or keyp(1) and mode == mode_level  then
+	if btnp(7) and mode == mode_level or keyp(16) and mode == mode_level  then
 		mode=mode_pause
 		prev_room = inRoomNr
 		setRoomNr(42)
 	elseif mode==mode_pause then
-		if btnp(7) or keyp(1) then
+		if btnp(7) or keyp(16) then
 		setRoomNr(prev_room)
 		mode=mode_level
 		end
