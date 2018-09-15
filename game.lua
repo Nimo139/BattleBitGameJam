@@ -1,3 +1,6 @@
+-- t: updates every frame (60fps)
+-- modes: used to change current state of game
+
 t = 0
 mode_menu = 1
 mode_prelevel = 2
@@ -7,11 +10,10 @@ mode_clear = 5
 mode_done = 6
 mode=mode_menu
 
-
 function init()
     --solids={[2]=true,[3]=true}
-	levelCounter = 0
-	music (1,0,7,false)
+	levelCounter = 0 -- increments after every finished level
+	music (1,0,7,false) --menu theme
 	p={
 	x=0,
 	y=0,
@@ -57,7 +59,6 @@ function isSolid(id)
 end
 
 -- is a block at x,y solid? (actual map view)
--- ich musste das zu testzwecken auskommentieren, da collision in raum64 nicht funktioniert? es nutzt jetzt überall raum 1 zur abfrage!
 
 function solid(x,y)
     return isSolid(mget2((x)//8,(y)//8, inRoomNr))
@@ -81,10 +82,10 @@ function woolLeft(x,y)
 end
 
 function woolInGoal(x,y)
-	if mget2((x)//8,(y)//8, w.room) == 133 then 
+	if mget2((x)//8,(y)//8, w.room) == 254 then 
 		--set wool state to small/ fix pos -> end
 		print("Level cleared",100,60)
-		spr(134, x, y, -1, 1, 0, 0, 1, 1)
+		spr(255, x, y, -1, 1, 0, 0, 1, 1)
 		w.size = 3
 		w.goal = true
 		line(x ,y+7 ,x+3,y+2,68)
@@ -200,16 +201,16 @@ function darwWoolString(x, y)
 		while solid(i,y) or solid(i-1,y) do   -- the first solid block
 			y = y - 8
 		end
-		line(ox,oy+7,i,y+7,68)
+		line(ox,oy+7,i,y+7,20)
 		
 		ox = i
 		oy = y
-		--spr(68,i,y,0,1,0,0,0)
+		--spr(20,i,y,0,1,0,0,0)
 		x=i
 	end
 	
 	if w.room == inRoomNr then
-		line(x,y+7,w.x,w.y+7,68)
+		line(x,y+7,w.x,w.y+7,20)
 	end
 end
 
@@ -467,7 +468,7 @@ function level()
 	
 	-- wool animations
 	if w.room == inRoomNr then 
-		spr(64 +  w.size ,w.x,w.y,0,1,w.x//9%4,0,0)
+		spr(16 +  w.size ,w.x,w.y,0,1,w.x//9%4,0,0)
 	end	
 	
 	darwWoolString(0, 120)
