@@ -85,10 +85,10 @@ function woolInGoal(x,y)
 	if mget2((x)//8,(y)//8, w.room) == 254 then 
 		--set wool state to small/ fix pos -> end
 		print("Level cleared",100,60)
-		spr(255, x, y, -1, 1, 0, 0, 1, 1)
+		spr(255, (x//8)*8, (y//8)*8, -1, 1, 0, 0, 1, 1)
 		w.size = 3
 		w.goal = true
-		line(x ,y+7 ,x+3,y+2,68)
+		line((x//8)*8 ,(y//8)*8+7 ,(x//8)*8+3,(y//8)*8+2,68)
 	end
 end
 
@@ -319,7 +319,7 @@ function prelevel()
 	initHold = true
 	end
 	
-	if holdTheLine == 100 or btnp(5) or keyp(24) then
+	if holdTheLine == 10 or btnp(5) or keyp(24) then   -- == 100 slow 
 		p={
 			x=20,
 			y=100,
