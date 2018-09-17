@@ -5,9 +5,10 @@ t = 0
 mode_menu = 1
 mode_prelevel = 2
 mode_level = 3
-mode_pause = 4
+mode_music = 4
 mode_clear = 5
 mode_done = 6
+mode_trackOne = 7
 mode=mode_menu
 
 function init()
@@ -253,15 +254,175 @@ end
 
 -- WOOL END
 
+-- MUSIC
+
+function playMusicOne()
+		
+		if btnp(3) then
+		 t=0
+			c=c+1
+			if c==20 then c=3 end
+			if c==16 then c=c+1 end
+			music(0,c)
+		end
+		
+		if btnp(2) then
+		 t=0
+			c=c-1
+			if c==-1 then c=19 end
+			if c==16 then c=c-1 end
+			music(0,c)
+		end
+		
+		if t==7*64 then
+			c=c+1
+			t=0
+			if c==20 then c=3 end
+			if c==16 then c=c+1 end
+			music(0,c)
+			
+		end
+		
+	 f1=peek(0xFF9C)|((peek(0xFF9D)&0x0F)<<8)
+	 v1=peek(0xFF9D)>>4
+	 f2=peek(0xFFAE)|((peek(0xFFAF)&0x0F)<<8)
+	 v2=peek(0xFFAF)>>4
+	 f3=peek(0xFFC0)|((peek(0xFFC1)&0x0F)<<8)
+	 v3=peek(0xFFC1)>>4
+	 f4=peek(0xFFD2)|((peek(0xFFD3)&0x0F)<<8)
+	 v4=peek(0xFFD3)>>4
+	 fx1=(math.log(f1)-min)/(max-min)
+	 fx2=(math.log(f2)-min)/(max-min)
+	 fx3=(math.log(f3)-min)/(max-min)
+	 fx4=(math.log(f4)-min)/(max-min)
+	 cls(2)
+		--map(0,0,8,8,175,1)
+	 rect(1,1,82,134,0)
+	 rect(2,2,80,132,3)
+	 line(11,4,11,130,0)
+	 line(31,4,31,130,0)
+	 line(51,4,51,130,0)
+	 line(71,4,71,130,0)
+		line(12,4,12,130,7)
+	 line(32,4,32,130,7)
+	 line(52,4,52,130,7)
+	 line(72,4,72,130,7)
+	 rect(13-(v1/2),129-(fx1*124),v1,2,0)
+	 rect(33-(v2/2),129-(fx2*124),v2,2,0)
+	 rect(53-(v3/2),129-(fx3*124),v3,2,0)
+	 rect(73-(v4/2),129-(fx4*124),v4,2,0)
+	 rect(12-(v1/2),128-(fx1*124),v1,2,13) --136-136
+	 rect(32-(v2/2),128-(fx2*124),v2,2,6)
+	 rect(52-(v3/2),128-(fx3*124),v3,2,15)
+	 rect(72-(v4/2),128-(fx4*124),v4,2,11)
+	 rect(84,1,67,19,0)
+	 rect(84,21,67,19,0)
+	 rect(84,41,67,19,0)
+	 rect(84,61,67,19,0)
+	 w=0
+	 w1=0
+	 w2=0
+	 w3=0
+	 w4=0
+		i1=0
+		i2=0
+		i3=0
+		i4=0
+		w1=peek(0xFF9E+(i1%16))
+	 w2=peek(0xFFB0+(i2%16))
+	 w3=peek(0xFFC2+(i3%16))
+	 w4=peek(0xFFD4+(i4%16))
+	 while w<64 do
+		ww1=w1
+		ww2=w2
+		ww3=w3
+		ww4=w4
+		w1=peek(0xFF9E+(i1%16))
+		w2=peek(0xFFB0+(i2%16))
+		w3=peek(0xFFC2+(i3%16))
+		w4=peek(0xFFD4+(i4%16))
+		line(85+(w*1),(ww1/-16*(v1/15))+18,86+(w*1),(w1/-16*(v1/15))+18,2)
+		line(85+(w*1),(ww2/-16*(v2/15))+38,86+(w*1),(w2/-16*(v2/15))+38,1)
+		line(85+(w*1),(ww3/-16*(v3/15))+58,86+(w*1),(w3/-16*(v3/15))+58,3)
+		line(85+(w*1),(ww4/-16*(v4/15))+78,86+(w*1),(w4/-16*(v4/15))+78,5)
+		i1=i1+(f1/300)
+			i2=i2+(f2/300)
+			i3=i3+(f3/300)
+			i4=i4+(f4/300)
+			w=w+1
+	 end
+		rect(84,126,155,9,0)
+		rect(85,127,153*((c/20)+(t/(7*64)/19)),7,8)
+		i=0
+		while i<10 do
+			if str[1+i] ~= nil then
+				print(str[1+i],153,8*i+2,0)
+				print(str[1+i],152,8*i+1,10)
+			end
+		 i=i+1
+		end
+		i=0
+		
+		ii=ii+0.075
+
+	
+	if btnp(6) or keyp(1) then
+		music()
+		mode = mode_music
+		setRoomNr(42)
+	end
+end
+
+-- MUSIC END
+
+function music_player()
+	print("Press X to Start Music!",75,110,14)
+	print("Press A to go Back to Menu!",65,120,14)
+		
+	if btnp(5) or keyp(24) then
+		mode = mode_trackOne
+		str={
+		"- Overworld -",
+		"",
+		"by",
+		"   kleeder",
+		"",
+		"",
+		}
+		min=math.log(16)
+		max=math.log(3951)
+		music (0,0,47,true)
+		c=0
+		i=0
+		ii=0
+		
+	end
+
+	if btnp(6) or keyp(1) then
+	mode=mode_menu
+	setRoomNr(64)
+	music (1,0,7,false)
+	t = 0
+	end
+end
+
 function mainMenu()
 
-	print("Press X!",95,110,14)
+	print("Press X to Start!",75,110,14)
+	print("Press A for Musicbox!",65,120,14)
 	print("Ver 0.3",0,130,1,true,1,true)
 	print("by kleeder, Nimo, BotA and alili1996",25,95,12)
 
 	if btnp(5) or keyp(24) then
 		init()
 		mode=mode_prelevel
+		music()
+		return
+	end
+	
+	if btnp(6) or keyp(1) then
+		mode=mode_music
+		setRoomNr(42)
 		music()
 		return
 	end
@@ -333,7 +494,7 @@ function prelevel()
 	initHold = true
 	end
 	
-	if holdTheLine == 10 or btnp(5) or keyp(24) then   -- == 100 slow 
+	if holdTheLine == 100 or btnp(5) or keyp(24) then
 		p={
 			x=20,
 			y=100,
@@ -512,20 +673,10 @@ function TIC()
 		clear_cutscene()
 	elseif mode==mode_done then
 		game_done()
-	end
-	if mode ~= mode_pause then
-		t=t+1		
-	end
-
-	if btnp(7) and mode == mode_level or keyp(16) and mode == mode_level  then
-		mode=mode_pause
-		prev_room = inRoomNr
-		setRoomNr(42)
-	elseif mode==mode_pause then
-		if btnp(7) or keyp(16) then
-		setRoomNr(prev_room)
-		mode=mode_level
-		end
+	elseif mode==mode_music then
+		music_player()
+	elseif mode==mode_trackOne then
+		playMusicOne()
 	end
 	
 -- DEBUG PRINTS
