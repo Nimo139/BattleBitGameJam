@@ -75,11 +75,19 @@ end
 
 
 function getGroundHeight(x, y)
-	while not solidInRoom(x ,y , w.room) do 
+	while (not solidInRoom(x ,y , w.room)) and (not solidInRoom(x-1 ,y , w.room)) do 
 		y = y + 1
 	end
 	return y
 end
+
+
+
+function cLine(x1,y1,x2,y2, color)
+	
+end 
+
+
 
 
 -- is a wool at x,y? (actual map view)
@@ -187,8 +195,8 @@ function woolUpdate()
 	end
 	
 	if w.vx > 0.01 or w.vy > 0.01 then 
-		w.track[w.length*2]	= w.x											--save coordinates in table, alternate x1,y1,x2,y2,...
-		w.track[w.length*2 + 1] = getGroundHeight(w.x, w.y)
+		w.track[w.length*2]	= w.x//8*8											--save coordinates in table, alternate x1,y1,x2,y2,...
+		w.track[w.length*2 + 1] = getGroundHeight(w.x//8*8, w.y)
 		w.length = w.length + 1
 	end
 	
