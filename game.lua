@@ -73,6 +73,15 @@ function solidInRoom(x,y, room)
 end
 
 
+
+function getGroundHeight(x, y)
+	while not solidInRoom(x ,y , w.room) do 
+		y = y + 1
+	end
+	return y
+end
+
+
 -- is a wool at x,y? (actual map view)
 function woolRight(x,y)
 	return (math.abs(p.x+7-w.x)<0.5 and math.abs(p.y-w.y)<0.5)
@@ -174,10 +183,18 @@ function woolUpdate()
 	if w.goal == false then 
 		w.x=w.x+w.vx
 		w.y=w.y+w.vy
+		
+	end
+	
+	if w.vx > 0.01 or w.vy > 0.01 then 
+		w.track[w.length*2]	= w.x											--save coordinates in table, alternate x1,y1,x2,y2,...
+		w.track[w.length*2 + 1] = getGroundHeight(w.x, w.y)
+		w.length = w.length + 1
 	end
 	
 	--needel
 	woolInGoal(w.x,w.y)
+	print(w.length,100,110,14)
 	
 	
 end	
@@ -203,7 +220,17 @@ function respawnWool()
 	w.y = y
 end
 
-function darwWoolString(x, y)
+function drawWoolString(x, y)
+	if w.length > 1 then
+		for x = 1, w.length-1, 1 do
+			line(w.track[(x-1)*2], w.track[(x-1)*2+1], w.track[x*2], w.track[x*2+1], 20)  --pix(w.track[x*2], w.track[x*2+1], 20)
+			
+		end
+		line(w.track[(w.length-1)*2], w.track[(w.length-1)*2+1], w.x, w.y+8 , 20)
+	end
+	
+	
+	-- not in use->
 	if w.room == inRoomNr then
 		tox = w.x
 	elseif w.room > inRoomNr then
@@ -211,30 +238,9 @@ function darwWoolString(x, y)
 	else 
 		tox = -1 
 	end
+	-- niu
 	
-	while solid(x,y) do   -- the first solid block
-		y = y - 8
-	end
 	
-	ox = x
-	oy = y
-	
-	for i = x,tox,8 do 
-		y = 128             
-		while solid(i,y) or solid(i-1,y) do   -- the first solid block
-			y = y - 8
-		end
-		line(ox,oy+7,i,y+7,20)
-		
-		ox = i
-		oy = y
-		--spr(20,i,y,0,1,0,0,0)
-		x=i
-	end
-	
-	if w.room == inRoomNr then
-		line(x,y+7,w.x,w.y+7,20)
-	end
 end
 
 -- WOOL END
@@ -339,6 +345,9 @@ function prelevel()
 			room = currentRoom+1,
 			goal = false,
 			size = 0,
+			track = {},
+			length = 0,
+			
 		}
 		
 		setRoomNr(currentRoom+1)
@@ -349,10 +358,12 @@ function prelevel()
 		music (2,4,63,true)
 		else
 		music (0,0,47,true)
+		--table.insert(w.track, 0)
 		end
 	else
 		holdTheLine = holdTheLine + 1
 	end
+	
 end
 
 function level()
@@ -465,7 +476,7 @@ function level()
 		spr(16 +  w.size ,w.x,w.y,0,1,w.x//9%4,0,0)
 	end	
 	
-	darwWoolString(0, 120)
+	drawWoolString(0, 120)
 	
 	if w.goal == true then
 		initHold = false
