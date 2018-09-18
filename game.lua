@@ -76,7 +76,7 @@ end
 
 
 function getGroundHeight(x, y)
-	while (not solidInRoom(x ,y , w.room)) and (not solidInRoom(x-1 ,y , w.room)) do 
+	while (not solidInRoom(x ,y , w.room)) and (not solidInRoom(x-1 ,y , w.room)) and y < 240 do      -- 240 under level  
 		y = y + 1
 	end
 	return y
