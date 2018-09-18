@@ -196,14 +196,14 @@ function woolUpdate()
 	end
 	
 	if w.vx > 0.01 or w.vy > 0.01 then 
-		w.track[w.length*2]	= w.x//8*8											--save coordinates in table, alternate x1,y1,x2,y2,...
-		w.track[w.length*2 + 1] = getGroundHeight(w.x//8*8, w.y)
-		w.length = w.length + 1
+		w.track[w.room][w.length[w.room]*2]	= w.x//8*8											--save coordinates in table, alternate x1,y1,x2,y2,...
+		w.track[w.room][w.length[w.room]*2 + 1] = getGroundHeight(w.x//8*8, w.y)
+		w.length[w.room] = w.length[w.room] + 1
 	end
 	
 	--needel
 	woolInGoal(w.x,w.y)
-	print(w.length,100,110,14)
+	print(w.length[inRoomNr],100,110,14)
 	
 	
 end	
@@ -230,12 +230,15 @@ function respawnWool()
 end
 
 function drawWoolString(x, y)
-	if w.length > 1 then
-		for x = 1, w.length-1, 1 do
-			line(w.track[(x-1)*2], w.track[(x-1)*2+1], w.track[x*2], w.track[x*2+1], 20)  --pix(w.track[x*2], w.track[x*2+1], 20)
+	if w.length[inRoomNr] > 1 then
+		for x = 1, w.length[inRoomNr]-1, 1 do
+			line(w.track[inRoomNr][(x-1)*2], w.track[inRoomNr][(x-1)*2+1], 
+			     w.track[inRoomNr][x*2],     w.track[inRoomNr][x*2+1],       20)  --pix(w.track[x*2], w.track[x*2+1], 20)
 			
 		end
-		line(w.track[(w.length-1)*2], w.track[(w.length-1)*2+1], w.x, w.y+8 , 20)
+		if w.room == inRoomNr then 
+			line(w.track[inRoomNr][(w.length[w.room]-1)*2], w.track[inRoomNr][(w.length[w.room]-1)*2+1], w.x, w.y+8 , 20)
+		end
 	end
 	
 	
@@ -515,9 +518,15 @@ function prelevel()
 			goal = false,
 			size = 0,
 			track = {},
-			length = 0,
+			length = {},
 			
 		}
+		
+		for r = 0, 64, 1 do  --init wool track for every room
+			w.track[r] = {}
+			w.length[r] = 0 
+		end
+		
 		
 		setRoomNr(currentRoom+1)
 		mode=mode_level
