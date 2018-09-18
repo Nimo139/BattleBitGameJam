@@ -86,6 +86,39 @@ end
 
 function cLine(x1,y1,x2,y2, color)
 	
+	dx = x2 - x1 
+	dy = y2 - y1
+	
+	trackX = {}
+	trackY = {}
+	counter = 0
+	
+	if y1 >= y2 then 
+		for x = x1, x2, 1 do
+			y = y1 + dy/(dx*dx) * (x - x1) * (x - x1)
+			--pix(x,y,color)
+			trackX[counter] = x 
+			trackY[counter] = y
+			counter = counter + 1 
+			--line(ox, oy, x, y, color)
+		end
+	else
+		for x = x1, x2, 1 do
+			y = y2 - dy/(dx*dx) * (x - x1) * (x - x1)
+			--pix(x2-(x-x1),y,color)
+			
+			trackX[counter] = x2-(x-x1) 
+			trackY[counter] = y
+			counter = counter + 1
+			--line(ox, oy, x, y, color)
+		end
+	end 
+	
+	for p=1, counter-1, 1 do 
+		line(trackX[p-1], trackY[p-1], trackX[p], trackY[p], color) --connects pixels of parabel
+	end
+	
+	
 end 
 
 
@@ -232,7 +265,7 @@ end
 function drawWoolString(x, y)
 	if w.length[inRoomNr] > 1 then
 		for x = 1, w.length[inRoomNr]-1, 1 do
-			line(w.track[inRoomNr][(x-1)*2], w.track[inRoomNr][(x-1)*2+1], 
+			cLine(w.track[inRoomNr][(x-1)*2], w.track[inRoomNr][(x-1)*2+1], 
 			     w.track[inRoomNr][x*2],     w.track[inRoomNr][x*2+1],       20)  --pix(w.track[x*2], w.track[x*2+1], 20)
 			
 		end
@@ -247,7 +280,7 @@ function drawWoolString(x, y)
 		tox = w.x
 	elseif w.room > inRoomNr then
 		tox = 240
-	else 
+	else
 		tox = -1 
 	end
 	-- niu
