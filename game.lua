@@ -163,25 +163,7 @@ end
 	
 	
 function resetLevel(levelCounter)
-	if levelCounter == 0 then
-		setRoomNr(2)
-	end
-	
-	if levelCounter == 1 then
-		setRoomNr(10)
-	end
-	
-	if levelCounter == 2 then
-		setRoomNr(18)
-	end
-	
-	if levelCounter == 3 then
-		setRoomNr(26)
-	end
-	
-	if levelCounter == 4 then
-		setRoomNr(34)
-	end
+	setRoomNr( 2 + levelCounter * 8 )   -- 2 10 18 26 24  
 end
 	
 --WOOL
@@ -272,20 +254,7 @@ function drawWoolString(x, y)
 		if w.room == inRoomNr then 
 			line(w.track[inRoomNr][(w.length[w.room]-1)*2], w.track[inRoomNr][(w.length[w.room]-1)*2+1], w.x, w.y+8 , 20)
 		end
-	end
-	
-	
-	-- not in use->
-	if w.room == inRoomNr then
-		tox = w.x
-	elseif w.room > inRoomNr then
-		tox = 240
-	else
-		tox = -1 
-	end
-	-- niu
-	
-	
+	end	
 end
 
 -- WOOL END
