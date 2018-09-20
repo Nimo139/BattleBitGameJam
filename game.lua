@@ -74,7 +74,6 @@ function solidInRoom(x,y, room)
 end
 
 
-
 function getGroundHeight(x, y)
 	while (not solidInRoom(x ,y , w.room)) and (not solidInRoom(x-1 ,y , w.room)) and y < 240 do      -- 240 under level  
 		y = y + 1
@@ -82,6 +81,17 @@ function getGroundHeight(x, y)
 	return y
 end
 
+
+function isPointInBlockID(x,y,room, id)
+	return mget2((x)//8,(y)//8, room) == id
+end
+
+--check if a Sprite 8x8 touches a Block with the ID
+function isWoolInBlockId(id)
+	return isPointInBlockID(w.x,w.y+w.vy, w.room, id) or isPointInBlockID(w.x+8,w.y+w.vy, w.room, id) 
+		or isPointInBlockID(w.x+8+w.vx,w.y+8+w.vy, w.room, id) or isPointInBlockID(w.x+w.vx,w.y+8+w.vy, w.room, id) 
+
+end
 
 
 function cLine(x1,y1,x2,y2, color)
@@ -185,6 +195,14 @@ function woolUpdate()
 		w.room = w.room - 1
 	end 
 	
+	
+	--specialBlocks 
+	--destroy
+	if isWoolInBlockId(54) then
+		destroyWool()
+	end
+	
+	
 	-- gravity 
     if solidInRoom(w.x,w.y+8+w.vy, w.room) or solidInRoom(w.x+7,w.y+8+w.vy, w.room) then
         w.vy=0
@@ -233,9 +251,19 @@ function throwWool()
 end
 
 
+function destroyWool()
+	w.respawn = true
+end
+
 function respawnWool()
 	w.room = inRoomNr
+	w.track[w.room] = {}
+	w.length[w.room] = 0
+	
+	--w.respawn = true
+	
 	w.x=28
+	w.vx = 0
 	w.vy = 0
 	y = 128             
 	while solid(0,y) do   -- respawn on the first solid block
@@ -521,6 +549,7 @@ function prelevel()
 			size = 0,
 			track = {},
 			length = {},
+			respawn = false
 			
 		}
 		
@@ -652,7 +681,16 @@ function level()
 	
 	
 	-- wool animations
-	if w.room == inRoomNr then 
+	if w.respawn then  
+		if w.size < 4 then 
+			spr(16 +  w.size ,w.x,w.y,0,1,w.x//9%4,0,0)
+			w.size = w.size + 0.4 
+		else 
+			w.size = 0
+			w.respawn = false
+			respawnWool()
+		end
+	elseif w.room == inRoomNr then 
 		spr(16 +  w.size ,w.x,w.y,0,1,w.x//9%4,0,0)
 	end	
 	
