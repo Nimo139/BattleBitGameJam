@@ -88,7 +88,7 @@ end
 
 --check if a Sprite 8x8 touches a Block with the ID
 function isWoolInBlockId(id)
-	return isPointInBlockID(w.x,w.y+w.vy, w.room, id) or isPointInBlockID(w.x+8,w.y+w.vy, w.room, id) 
+	return isPointInBlockID(w.x+w.vx,w.y+w.vy, w.room, id) or isPointInBlockID(w.x+8,w.y+w.vy, w.room, id) 
 		or isPointInBlockID(w.x+8+w.vx,w.y+8+w.vy, w.room, id) or isPointInBlockID(w.x+w.vx,w.y+8+w.vy, w.room, id) 
 
 end
