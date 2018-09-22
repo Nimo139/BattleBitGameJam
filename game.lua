@@ -61,7 +61,7 @@ end
 
 -- is block id solid?
 function isSolid(id)
-	return id >= 32 and id <= 79 or id == 253  --#032-#079: Solid // also id 253: destroy-block
+	return id >= 32 and id <= 79 or id >= 241 and id <= 246 --#032-#079: Solid // also id 253: destroy-block
 end
 
 -- is a block at x,y solid? (actual map view)
@@ -148,10 +148,10 @@ function woolLeft(x,y)
 end
 
 function woolInGoal(x,y)
-	if mget2((x)//8,(y)//8, w.room) == 254 then 
+	if mget2((x)//8,(y)//8, w.room) == 254 or mget2((x)//8,(y)//8, w.room) == 253 or mget2((x)//8,(y)//8, w.room) == 252 then 
 		--set wool state to small/ fix pos -> end
 		print("Level cleared",100,60)
-		spr(255, (x//8)*8, (y//8)*8, -1, 1, 0, 0, 1, 1)
+		spr(255, (x//8)*8, (y//8)*8, 2, 1, 0, 0, 1, 1)
 		w.size = 3
 		w.goal = true
 		line((x//8)*8 ,(y//8)*8+7 ,(x//8)*8+3,(y//8)*8+2,68)
@@ -200,7 +200,7 @@ function woolUpdate()
 	
 	--specialBlocks 
 	--destroy
-	if isWoolInBlockId(253) then
+	if isWoolInBlockId(241) or isWoolInBlockId(242) or isWoolInBlockId(243) or isWoolInBlockId(244) or isWoolInBlockId(245) or isWoolInBlockId(246) then
 		destroyWool()
 	end
 	
