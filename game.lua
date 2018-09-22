@@ -9,6 +9,11 @@ mode_music = 4
 mode_clear = 5
 mode_done = 6
 mode_trackOne = 7
+mode_trackTwo = 8
+mode_trackThree = 9
+mode_trackFour = 10
+mode_trackFive = 11
+mode_trackSix = 12
 mode=mode_menu
 
 function init()
@@ -56,7 +61,7 @@ end
 
 -- is block id solid?
 function isSolid(id)
-	return id >= 32 and id <= 79  --#032-#079: Solid
+	return id >= 32 and id <= 79 or id == 253  --#032-#079: Solid // also id 253: destroy-block
 end
 
 -- is a block at x,y solid? (actual map view)
@@ -93,7 +98,7 @@ function isWoolInBlockId(id)
 
 end
 
-
+-- draws a parabel between 2 points
 function cLine(x1,y1,x2,y2, color)
 	
 	dx = x2 - x1 
@@ -168,16 +173,13 @@ function respawn()
 end
 
 
-
---function lerp(a,b,t) return (1-t)*a + t*b end
-	
-	
 function resetLevel(levelCounter)
 	setRoomNr( 2 + levelCounter * 8 )   -- 2 10 18 26 24  
 end
-	
+
+
+
 --WOOL
-	
 	
 -- wool physics
 function woolUpdate()
@@ -198,7 +200,7 @@ function woolUpdate()
 	
 	--specialBlocks 
 	--destroy
-	if isWoolInBlockId(54) then
+	if isWoolInBlockId(253) then
 		destroyWool()
 	end
 	
@@ -236,8 +238,7 @@ function woolUpdate()
 	
 	--needel
 	woolInGoal(w.x,w.y)
-	print(w.length[inRoomNr],100,110,14)
-	
+	--print(w.length[inRoomNr],100,110,14)
 	
 end	
 	
@@ -276,11 +277,11 @@ function drawWoolString(x, y)
 	if w.length[inRoomNr] > 1 then
 		for x = 1, w.length[inRoomNr]-1, 1 do
 			cLine(w.track[inRoomNr][(x-1)*2], w.track[inRoomNr][(x-1)*2+1], 
-			     w.track[inRoomNr][x*2],     w.track[inRoomNr][x*2+1],       20)  --pix(w.track[x*2], w.track[x*2+1], 20)
+			     w.track[inRoomNr][x*2],     w.track[inRoomNr][x*2+1],       276)  --pix(w.track[x*2], w.track[x*2+1], 276)
 			
 		end
 		if w.room == inRoomNr then 
-			line(w.track[inRoomNr][(w.length[w.room]-1)*2], w.track[inRoomNr][(w.length[w.room]-1)*2+1], w.x, w.y+8 , 20)
+			line(w.track[inRoomNr][(w.length[w.room]-1)*2], w.track[inRoomNr][(w.length[w.room]-1)*2+1], w.x, w.y+8 , 276)
 		end
 	end	
 end
@@ -668,22 +669,24 @@ function level()
 	-- cat animations 
 	if p.p > 0 then
 		p.p = p.p -1 
-		spr(9+p.p//7,p.x,p.y,0,1,p.o,0,0)
+		spr(264+p.p//7,p.x,p.y,0,1,p.o,0,0)		-- punch sp 264 + 265
 	elseif p.vy > 0 then
-		spr(6,p.x,p.y,0,1,p.o,0,0)			 -- landing
+		spr(261,p.x,p.y,0,1,p.o,0,0)			 -- landing sp 261
 	elseif p.vy<0 then
-		spr(5,p.x,p.y,0,1,p.o,0,0)           -- jumping 
+		spr(260,p.x,p.y,0,1,p.o,0,0)           -- jumping sp 260
 	elseif p.vx==0 then
-		spr(7+t%80//40,p.x,p.y,0,1,p.o,0,0)  -- standing sp 7-8
+		spr(262+t%80//40,p.x,p.y,0,1,p.o,0,0)  -- standing sp 262-263
 	else
-		spr(1+t%40//10,p.x,p.y,0,1,p.o,0,0)  --running sp 1-4
+		spr(256+t%40//10,p.x,p.y,0,1,p.o,0,0)  --running sp 256-259
+	--else
+		--spr( --ducking sp 266-267
 	end
 	
 	
 	-- wool animations
 	if w.respawn then  
 		if w.size < 4 then 
-			spr(16 +  w.size ,w.x,w.y,0,1,w.x//9%4,0,0)
+			spr(272 +  w.size ,w.x,w.y,0,1,w.x//9%4,0,0)
 			w.size = w.size + 0.4 
 		else 
 			w.size = 0
@@ -691,7 +694,7 @@ function level()
 			respawnWool()
 		end
 	elseif w.room == inRoomNr then 
-		spr(16 +  w.size ,w.x,w.y,0,1,w.x//9%4,0,0)
+		spr(272 +  w.size ,w.x,w.y,0,1,w.x//9%4,0,0)
 	end	
 	
 	drawWoolString(0, 120)
