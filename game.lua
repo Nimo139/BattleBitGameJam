@@ -705,6 +705,8 @@ function level()
 		mode=mode_clear
 		music (4,0,63,false)
 	end
+	
+	
 end
 	
 
@@ -730,6 +732,8 @@ function TIC()
 	elseif mode==mode_trackOne then
 		playMusicOne()
 	end
+	
+	t = t+1
 	
 -- DEBUG PRINTS
 
