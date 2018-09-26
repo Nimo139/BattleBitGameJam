@@ -14,6 +14,7 @@ mode_trackThree = 9
 mode_trackFour = 10
 mode_trackFive = 11
 mode_trackSix = 12
+mode_debug = false
 mode=mode_menu
 
 function init()
@@ -562,16 +563,25 @@ function prelevel()
 	end
 	
 	if holdTheLine == 100 or btnp(5) or keyp(24) then
-		spawnPlayer()
-		spawnWool(currentRoom)
+		if mode_debug == true then
+			spawnPlayer()
+			spawnWool(48)
+		else
+			spawnPlayer()
+			spawnWool(currentRoom)
+		end
 		
 		for r = 0, 64, 1 do  --init wool track for every room
 			w.track[r] = {}
 			w.length[r] = 0 
 		end
 		
+		if mode_debug == true then
+			setRoomNr(49)
+		else
+			setRoomNr(currentRoom+1)
+		end
 		
-		setRoomNr(currentRoom+1)
 		mode=mode_level
 		if levelCounter == 4 then
 		music (3,15,63,true)
