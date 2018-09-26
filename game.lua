@@ -86,6 +86,39 @@ function getGroundHeight(x, y)
 	return y
 end
 
+function spawnPlayer()
+	p={
+		x=20,
+		y=0,
+		vx=0, --Velocity X
+		vy=0, --Velocity Y
+		o =0, --orientation
+		f =0, --falling
+		p =0, --punch
+	}
+	y = 0
+	while isSolid(0,y) do   -- respawn on the first solid block
+		y = y - 8
+	end
+	p.y = y
+end
+
+function spawnWool(currentRoom)
+	w={
+		x = 28,
+		y = 0,
+		vx= 0,
+		vy= 0,
+		r = 0,
+		room = currentRoom+1,
+		goal = false,
+		size = 0,
+		track = {},
+		length = {},
+		respawn = false
+			
+	}
+end
 
 function isPointInBlockID(x,y,room, id)
 	return mget2((x)//8,(y)//8, room) == id
@@ -410,8 +443,8 @@ end
 -- MUSIC END
 
 function music_player()
-	print("Press X to Start Music!",75,110,14)
-	print("Press A to go Back to Menu!",65,120,14)
+	print("Press X to Start Music!",75,110,15)
+	print("Press A to go Back to Menu!",65,120,15)
 		
 	if btnp(5) or keyp(24) then
 		mode = mode_trackOne
@@ -442,9 +475,9 @@ end
 
 function mainMenu()
 
-	print("Press X to Start!",75,110,14)
-	print("Press A for Musicbox!",65,120,14)
-	print("Ver 0.3",0,130,1,true,1,true)
+	print("Press X to Start!",75,110,15)
+	print("Press A for Musicbox!",65,120,15)
+	print("Ver 0.4.1",0,130,15,true,1,true)
 	print("by kleeder, Nimo, BotA and alili1996",25,95,12)
 
 	if btnp(5) or keyp(24) then
@@ -529,30 +562,8 @@ function prelevel()
 	end
 	
 	if holdTheLine == 100 or btnp(5) or keyp(24) then
-		p={
-			x=20,
-			y=100,
-			vx=0, --Velocity X
-			vy=0, --Velocity Y
-			o =0, --orientation
-			f =0, --falling
-			p =0, --punch
-		}
-		
-		w={
-			x = 28,
-			y = 100,
-			vx= 0,
-			vy= 0,
-			r = 0,
-			room = currentRoom+1,
-			goal = false,
-			size = 0,
-			track = {},
-			length = {},
-			respawn = false
-			
-		}
+		spawnPlayer()
+		spawnWool(currentRoom)
 		
 		for r = 0, 64, 1 do  --init wool track for every room
 			w.track[r] = {}
@@ -674,14 +685,13 @@ function level()
 		spr(261,p.x,p.y,0,1,p.o,0,0)			 -- landing sp 261
 	elseif p.vy<0 then
 		spr(260,p.x,p.y,0,1,p.o,0,0)           -- jumping sp 260
+	elseif p.vx==0 and btn(1) then
+		spr(266+t%80//40,p.x,p.y,0,1,p.o,0,0) --ducking sp 266-267
 	elseif p.vx==0 then
 		spr(262+t%80//40,p.x,p.y,0,1,p.o,0,0)  -- standing sp 262-263
 	else
 		spr(256+t%40//10,p.x,p.y,0,1,p.o,0,0)  --running sp 256-259
-	--else
-		--spr( --ducking sp 266-267
 	end
-	
 	
 	-- wool animations
 	if w.respawn then  
