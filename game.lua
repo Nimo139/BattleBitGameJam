@@ -208,9 +208,9 @@ function respawn()
 	p.x=20
 	--p.y=100
 	p.o= 0
-	y = 128             
+	y = 0             
 	while solid(0,y) do   -- respawn on the first solid block
-		y = y - 8
+		y = y + 8
 	end
 	p.y = y
 	
@@ -329,9 +329,9 @@ function respawnWool()
 	w.x=28
 	w.vx = 0
 	w.vy = 0
-	y = 128             
+	y = 0             
 	while solid(0,y) do   -- respawn on the first solid block
-		y = y - 8
+		y = y + 8
 	end
 	w.y = y
 end
