@@ -17,7 +17,7 @@ mode_trackSix = 12
 mode_debug = false
 mode=mode_menu
 
-woolStringLength = {400,200,200,200,100}  -- for each level
+woolStringLength = {800,200,200,200,100}  -- for each level
 
 
 
@@ -64,10 +64,16 @@ function setRoomNr(roomNr)
 	inRoomNr = roomNr
 end
 
--- is block id solid?
+-- is block id solid?  for player
 function isSolid(id)
-	return id >= 32 and id <= 79 or id >= 241 and id <= 246 --#032-#079: Solid // also id 253: destroy-block
+	return id >= 32 and id <= 79 or id >= 241 and id <= 246 or id == 247--#032-#079: Solid // also id 253: destroy-block
 end
+
+-- is block id solid? for wool
+function isSolidWool(id)
+	return id >= 32 and id <= 79 or id >= 241 and id <= 246 or id == 248--#032-#079: Solid // also id 253: destroy-block
+end
+
 
 -- is a block at x,y solid? (actual map view)
 
@@ -80,7 +86,7 @@ end
 --end
 
 function solidInRoom(x,y, room)
-    return isSolid(mget2((x)//8,(y)//8, room))
+    return isSolidWool(mget2((x)//8,(y)//8, room))
 end
 
 
