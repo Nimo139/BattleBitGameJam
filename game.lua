@@ -17,6 +17,10 @@ mode_trackSix = 12
 mode_debug = false
 mode=mode_menu
 
+woolStringLength = {400,200,200,200,100}  -- for each level
+
+
+
 function init()
     --solids={[2]=true,[3]=true}
 	levelCounter = 0 -- increments after every finished level
@@ -116,9 +120,10 @@ function spawnWool(currentRoom)
 		size = 0,
 		track = {},
 		length = {},
-		respawn = false
-			
+		respawn = false,
+		stringLength = 0
 	}
+	--w.stringLength = 
 end
 
 function isPointInBlockID(x,y,room, id)
@@ -256,19 +261,36 @@ function woolUpdate()
 		w.vx = 0
 	end
 	
+	if w.size <= 1 then 
+		print("Wool empty!" ,100,60)
+		w.vx=0
+		--w.vy=0
+	end		
 	
-		
 	if w.goal == false then 
 		w.x=w.x+w.vx
 		w.y=w.y+w.vy
-		
 	end
+
 	
-	if w.vx > 0.01 or w.vy > 0.01 then 
+	if math.abs(w.vx) > 0.01 or math.abs(w.vy) > 0.01 then 
 		w.track[w.room][w.length[w.room]*2]	= w.x//8*8											--save coordinates in table, alternate x1,y1,x2,y2,...
 		w.track[w.room][w.length[w.room]*2 + 1] = getGroundHeight(w.x//8*8, w.y)
 		w.length[w.room] = w.length[w.room] + 1
+		w.stringLength = w.stringLength + math.abs(w.vx)
 	end
+	
+	
+	
+	
+	--calc woolSize with the diff of the level max length (woolStringLength) -  5 sizes  
+	w.size = math.max(0,math.ceil(((woolStringLength[levelCounter+1] - w.stringLength) / woolStringLength[levelCounter+1]) * 4))
+	
+	--print(math.ceil(((woolStringLength[levelCounter+1] - w.stringLength) / woolStringLength[levelCounter+1]) * 4) ,100,110,14)
+	--print(w.length[inRoomNr] ,140,110,14)
+	--print(woolStringLength[levelCounter+1] ,80,110,14)
+
+
 	
 	--needel
 	woolInGoal(w.x,w.y)
@@ -295,6 +317,7 @@ function respawnWool()
 	w.track[w.room] = {}
 	w.length[w.room] = 0
 	
+	--w.stringLength = woolStringLength[levelCounter+1]
 	--w.respawn = true
 	
 	w.x=28
@@ -315,7 +338,7 @@ function drawWoolString(x, y)
 			
 		end
 		if w.room == inRoomNr then 
-			line(w.track[inRoomNr][(w.length[w.room]-1)*2], w.track[inRoomNr][(w.length[w.room]-1)*2+1], w.x, w.y+8 , 276)
+			line(w.track[inRoomNr][(w.length[w.room]-1)*2], w.track[inRoomNr][(w.length[w.room]-1)*2+1], w.x+4, w.y+6 , 276)
 		end
 	end	
 end
@@ -595,6 +618,8 @@ function prelevel()
 		holdTheLine = holdTheLine + 1
 	end
 	
+	
+	
 end
 
 function level()
@@ -673,6 +698,7 @@ function level()
 	elseif btnp(4) and p.p ==  0 or keyp(4) and p.p ==  0 then 
 		p.p = 14
 	end
+	
 	woolUpdate()
 	
 	--Reset Level if Stuck
@@ -706,7 +732,7 @@ function level()
 	-- wool animations
 	if w.respawn then  
 		if w.size < 4 then 
-			spr(272 +  w.size ,w.x,w.y,0,1,w.x//9%4,0,0)
+			spr(272 +  w.size ,w.x,w.y,0,1,0,w.x//9%4,0)
 			w.size = w.size + 0.4 
 		else 
 			w.size = 0
@@ -714,7 +740,7 @@ function level()
 			respawnWool()
 		end
 	elseif w.room == inRoomNr then 
-		spr(272 +  w.size ,w.x,w.y,0,1,w.x//9%4,0,0)
+		spr(276 -  w.size ,w.x,w.y+4-w.size,0,1,0,w.x//3%4,0)
 	end	
 	
 	drawWoolString(0, 120)
