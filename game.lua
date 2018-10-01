@@ -356,6 +356,38 @@ end
 
 -- WOOL END
 
+--Map stuff
+
+function has_value (tab, val)
+    for index, value in ipairs(tab) do
+        if value == val then
+            return true
+        end
+    end
+
+    return false
+end
+
+function animateBlocks()
+	-- animation with 2 sprites, second spirte should have the id + 1   
+	-- use the first sprite in the map editor
+	 
+	animatiedBlocks = {160, 162}  -- only the first id, that is on the map   (lava, water) 
+	
+	for y = 0,17,1 do
+		for x = 0,30,1 do
+			tile = mget2(x,y, inRoomNr)
+			if  has_value(animatiedBlocks, tile) then 
+				spr(tile + (t/13)%2 ,x*8,y*8)			-- t/13 magic number, -> slow animation 
+			end
+		end
+	end
+
+end
+
+-- Map end 
+
+
 -- MUSIC
 
 function playMusicOne()
@@ -791,7 +823,7 @@ function TIC()
 	end
 	
 	t = t+1
-	
+	animateBlocks()
 -- DEBUG PRINTS
 
 --print(inRoomNr,84,84)
