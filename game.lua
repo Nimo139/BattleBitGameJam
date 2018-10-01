@@ -317,6 +317,14 @@ function throwWool()
 	end
 end
 
+function pullWool()
+	if inRoomNr == w.room then
+		w.vx = -(w.x-p.x)/4
+		w.vy = 0 --(w.y-p.y)
+		p.p = 14
+	end
+end
+
 
 function destroyWool()
 	w.respawn = true
@@ -358,6 +366,7 @@ end
 
 --Map stuff
 
+-- check if a value is in a table, thx Oka, stackoverflow 
 function has_value (tab, val)
     for index, value in ipairs(tab) do
         if value == val then
@@ -676,6 +685,12 @@ function level()
 		p.o = 0
     else p.vx=0
     end
+	
+	--sneak
+	if btn(1) then 
+		p.vx = p.vx/4
+	end
+	
     
 	-- wall left/right?
     if solid(p.x+p.vx,p.y+p.vy) or solid(p.x+7+p.vx,p.y+p.vy) or solid(p.x+p.vx,p.y+7+p.vy) or solid(p.x+7+p.vx,p.y+7+p.vy) then
@@ -736,12 +751,14 @@ function level()
 	end
 	
 	dis = math.sqrt((w.x-p.x)^2 + (w.y-p.y)^2 ) 
-	if btnp(4) and dis < 16 or keyp(4) and dis < 16 then 
-		throwWool()
+	if btn(1) and btnp(4) and dis < 9 or btn(1) and keyp(4) and dis < 9 then 
+		pullWool()
+	elseif not btn(1) and btnp(4) and dis < 16 or not btn(1) and keyp(4) and dis < 16 then	
+		throwWool()	
 	elseif btnp(4) and p.p ==  0 or keyp(4) and p.p ==  0 then 
 		p.p = 14
 	end
-	
+	--print(dis,84,84)
 	woolUpdate()
 	
 	--Reset Level if Stuck
@@ -764,7 +781,7 @@ function level()
 		spr(261,p.x,p.y,0,1,p.o,0,0)			 -- landing sp 261
 	elseif p.vy<0 then
 		spr(260,p.x,p.y,0,1,p.o,0,0)           -- jumping sp 260
-	elseif p.vx==0 and btn(1) then
+	elseif btn(1) then
 		spr(266+t%80//40,p.x,p.y,0,1,p.o,0,0) --ducking sp 266-267
 	elseif p.vx==0 then
 		spr(262+t%80//40,p.x,p.y,0,1,p.o,0,0)  -- standing sp 262-263
