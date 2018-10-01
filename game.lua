@@ -14,11 +14,11 @@ mode_trackThree = 9
 mode_trackFour = 10
 mode_trackFive = 11
 mode_trackSix = 12
-mode_debug = false
+mode_debug = true
 mode=mode_menu
 
-woolStringLength = {800,200,200,200,100}  -- for each level
-
+woolStringLength = {2400,200,200,200,100}  -- for each level
+size = 0  --unnötig nötige variable für die destroy animation
 
 
 function init()
@@ -249,6 +249,9 @@ function woolUpdate()
 		destroyWool()
 	end
 	
+	if isWoolInBlockId(160) or isWoolInBlockId(161) then
+		destroyWool()
+	end 
 	
 	-- gravity 
     if solidInRoom(w.x,w.y+8+w.vy, w.room) or solidInRoom(w.x+7,w.y+8+w.vy, w.room) then
@@ -267,7 +270,7 @@ function woolUpdate()
 		w.vx = 0
 	end
 	
-	if w.size <= 1 then 
+	if w.size <= 1 and w.respawn == false then 
 		print("Wool empty!" ,100,60)
 		w.vx=0
 		--w.vy=0
@@ -290,8 +293,9 @@ function woolUpdate()
 	
 	
 	--calc woolSize with the diff of the level max length (woolStringLength) -  5 sizes  
-	w.size = math.max(0,math.ceil(((woolStringLength[levelCounter+1] - w.stringLength) / woolStringLength[levelCounter+1]) * 4))
-	
+	if w.respawn == false then 
+		w.size = math.max(0,math.ceil(((woolStringLength[levelCounter+1] - w.stringLength) / woolStringLength[levelCounter+1]) * 4))
+	end
 	--print(math.ceil(((woolStringLength[levelCounter+1] - w.stringLength) / woolStringLength[levelCounter+1]) * 4) ,100,110,14)
 	--print(w.length[inRoomNr] ,140,110,14)
 	--print(woolStringLength[levelCounter+1] ,80,110,14)
@@ -738,11 +742,11 @@ function level()
 	
 	-- wool animations
 	if w.respawn then  
-		if w.size < 4 then 
-			spr(272 +  w.size ,w.x,w.y,0,1,0,w.x//9%4,0)
-			w.size = w.size + 0.4 
+		if size < 4 then 
+			spr(272 +  size ,w.x,w.y,0,1,0,w.x//9%4,0)
+			size = size + 0.2 
 		else 
-			w.size = 0
+			size = 0
 			w.respawn = false
 			respawnWool()
 		end
