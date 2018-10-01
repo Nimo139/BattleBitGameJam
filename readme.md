@@ -4,8 +4,16 @@ Im code Editor:
 
 dofile("game.lua")
 
-Wiki mit nützlichen Kram:
+Wiki mit nÃ¼tzlichen Kram:
 https://github.com/nesbox/TIC-80/wiki
+
+## Steuerung 
+- Arrows L/R: Move
+- Arrow up: Jump
+- Arrow down: Sneak
+- D: Throw Wool
+- D + Sneak: Pull wool (near to the wool)
+- R: Reset level
 
 
 # Notizen und Struktur
@@ -13,9 +21,9 @@ https://github.com/nesbox/TIC-80/wiki
 ## Farbpalette:
 - 16 15 14 -> Sind Farben der Katze (11 auch, aber wenn wir diesen Platz brauchen, dann mache ich das Design nochmal anders)
 - 13 12 -> Sind Farben der Wolle
-- 2 3 -> Farben für'n Himmel
-- 4 5 6 7 8 -> Farben für'n Boden
-- .. Der Rest ist für nichts, bis jetzt. Natürlich sind die Farben Universal, aber ungefähr geordnet.
+- 2 3 -> Farben fÃ¼r'n Himmel
+- 4 5 6 7 8 -> Farben fÃ¼r'n Boden
+- .. Der Rest ist fÃ¼r nichts, bis jetzt. NatÃ¼rlich sind die Farben Universal, aber ungefÃ¤hr geordnet.
 
 ## Sprites:
 - #000: blank
@@ -45,11 +53,11 @@ https://github.com/nesbox/TIC-80/wiki
 - 64: Main Screen
 
 ## Level:
-- 01: Basic Tutorial (kleiner Höhlenteil in der Mitte)
+- 01: Basic Tutorial (kleiner HÃ¶hlenteil in der Mitte)
 - 02: Basic mit einer neuen Sache (erster richtiger Level) (100% overworld?)
-- 03: Overworld mit Übergang zur Höhle (anspruchsvoller)
-- 04: Höhle - knifflig - am Ende Übergang zum letzten Gebiet/Level
-- 05: brutal schwer; optisch anders (Castle? Hölle? Spooky?)
+- 03: Overworld mit Ãœbergang zur HÃ¶hle (anspruchsvoller)
+- 04: HÃ¶hle - knifflig - am Ende Ãœbergang zum letzten Gebiet/Level
+- 05: brutal schwer; optisch anders (Castle? HÃ¶lle? Spooky?)
 
 ## SFX:
 - 00: Lead (Pulse 1)
