@@ -322,6 +322,7 @@ function respawnWool()
 	w.room = inRoomNr
 	w.track[w.room] = {}
 	w.length[w.room] = 0
+	w.stringLength = 0
 	
 	--w.stringLength = woolStringLength[levelCounter+1]
 	--w.respawn = true
