@@ -303,19 +303,33 @@ function woolUpdate()
 	
 end	
 	
--- vector from cat to wool 
+
+function sign(int)
+	if int < 0 then 
+		return -1
+	else 
+		return 1
+	end
+end
+	
+	
+-- vector from cat to wool    es gibt ja nur noch p.o mit 0 nacht rechts und 1 nach links, wenn (w.x-p.x) positiv ist muss p.o 0 sein und sonst 1
 function throwWool()
 	if inRoomNr == w.room then
-		w.vx = (w.x-p.x)/2
-		w.vy = -3 --(w.y-p.y)
+		if sign((w.x-p.x)) == 1 and p.o == 0 or sign((w.x-p.x)) == -1 and p.o == 1 then -- überlege verinfachung 
+			w.vx = sign((w.x-p.x)) * 3    -- Weite: 3 
+			w.vy = -3 --(w.y-p.y) 		  -- Hoehe: 3
+		end
 		p.p = 14
 	end
 end
 
 function pullWool()
 	if inRoomNr == w.room then
-		w.vx = -(w.x-p.x)/4
-		w.vy = 0 --(w.y-p.y)
+		if sign((w.x-p.x)) == 1 and p.o == 0 or sign((w.x-p.x)) == -1 and p.o == 1 then
+			w.vx = sign((w.x-p.x)) * -2    -- Weite: 3 
+			w.vy = 0					  -- Hoehe: 0
+		end
 		p.p = 14
 	end
 end
