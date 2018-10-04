@@ -15,6 +15,7 @@ mode=mode_menu
 woolStringLength = {2400,200,200,200,100}  -- for each level
 size = 0  --unnötig nötige variable für die destroy animation
 
+playerStartPos = {20, 0, 20, 0, 20, 0, 20, 0, 20, 0  }
 woolStartPos = {28, 0, 28, 0, 28, 0, 28, 0, 28, 0  } -- x,y, x2,y2   level 1 - 5 
 
 
@@ -202,16 +203,12 @@ end
 
 
 function respawn()
-	p.x=20
-	--p.y=100
 	p.o= 0
-	y = 0             
-	while solid(0,y) do   -- respawn on the first solid block
-		y = y + 8
-	end
-	p.y = y
+	inRoomNr = 2 + levelCounter * 8 
 	
-	
+	p.x = playerStartPos[(levelCounter) * 2 +1]
+	p.y = playerStartPos[(levelCounter) * 2 +2]
+	--print(p.y,128,84)
 end
 
 
@@ -341,7 +338,6 @@ function respawnWool()
 	w.vy = 0
 	
 	w.x = woolStartPos[(levelCounter) * 2 +1]
-	trace(woolStartPos[(levelCounter) * 2 +1]  )
 	w.y = woolStartPos[(levelCounter) * 2 +2]
 end
 
