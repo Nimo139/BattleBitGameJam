@@ -345,9 +345,6 @@ function respawnWool()
 	w.length[w.room] = 0
 	w.stringLength = 0
 	
-	--w.stringLength = woolStringLength[levelCounter+1]
-	--w.respawn = true
-	
 	w.vx = 0
 	w.vy = 0
 	
