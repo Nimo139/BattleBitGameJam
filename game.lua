@@ -14,7 +14,7 @@ mode_trackThree = 9
 mode_trackFour = 10
 mode_trackFive = 11
 mode_trackSix = 12
-mode_debug = true
+mode_debug = false
 mode=mode_menu
 
 woolStringLength = {2400,200,200,200,100}  -- for each level
@@ -519,8 +519,10 @@ end
 -- MUSIC END
 
 function music_player()
-	print("Press X to Start Music!",75,110,15)
-	print("Press A to go Back to Menu!",65,120,15)
+	print("Press Key 1-6 to Start Music!",44,103,0)
+	print("Press Key 1-6 to Start Music!",43,102,15)
+	print("Press A to go Back to Menu!",49,113,0)
+	print("Press A to go Back to Menu!",48,112,15)
 		
 	if btnp(5) or keyp(24) then
 		mode = mode_trackOne
@@ -535,6 +537,7 @@ function music_player()
 		min=math.log(16)
 		max=math.log(3951)
 		music (0,0,47,true)
+		t=0
 		c=0
 		i=0
 		ii=0
@@ -551,10 +554,17 @@ end
 
 function mainMenu()
 
-	print("Press X to Start!",75,110,15)
-	print("Press A for Musicbox!",65,120,15)
-	print("Ver 0.4.1",0,130,15,true,1,true)
-	print("by kleeder, Nimo, BotA and alili1996",25,95,12)
+	if t%80 < 40 then
+		print("Press X to Start!",11,46,0)
+		print("Press X to Start!",10,45,15)
+		print("Press A for Musicbox!",116,46,0)
+		print("Press A for Musicbox!",115,45,15)
+	end
+	print("Ver 0.5",0,130,15,true,1,true)
+	print("by kleeder, Nimo, BotA and alili1996",53,130,15)
+	spr(432,5,2,0,1,0,0,8,5) --1
+	spr(352,88,2,0,1,0,0,8,5) --2
+	spr(360,170,2,0,1,0,0,8,5) --3
 
 	if btnp(5) or keyp(24) then
 		init()
