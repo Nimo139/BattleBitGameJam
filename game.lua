@@ -1,3 +1,8 @@
+-- title:  Katzu
+-- author: kleeder, Nimo, BotA, alili1996
+-- desc:   BotB Game Jam 3
+-- script: lua
+
 -- t: updates every frame (60fps)
 -- modes: used to change current state of game
 
@@ -21,7 +26,7 @@ woolStartPos = {28, 0, 28, 0, 28, 0, 28, 0, 28, 0  } -- x,y, x2,y2   level 1 - 5
 
 function init()
     --solids={[2]=true,[3]=true}
-	levelCounter = 0 -- increments after every finished level
+	levelCounter = pmem(1) -- increments after every finished level
 	music (1,0,7,false) --menu theme
 	p={
 	x=0,
@@ -766,6 +771,7 @@ function prelevel()
 
 	if levelCounter == 5 then
 		levelCounter = 0
+		pmem(1, levelCounter)
 		setRoomNr(41)
 		mode=mode_done
 		music (5,0,63,false)
@@ -950,6 +956,7 @@ function level()
 	if w.goal == true then
 		initHold = false
 		levelCounter = levelCounter+1
+		pmem(1, levelCounter)
 		mode=mode_clear
 		music (4,0,63,false)
 	end
