@@ -8,12 +8,7 @@ mode_level = 3
 mode_music = 4
 mode_clear = 5
 mode_done = 6
-mode_trackOne = 7
-mode_trackTwo = 8
-mode_trackThree = 9
-mode_trackFour = 10
-mode_trackFive = 11
-mode_trackSix = 12
+mode_playMusic = 7
 mode_debug = false
 mode=mode_menu
 
@@ -399,83 +394,58 @@ end
 
 -- MUSIC
 
-function playMusicOne()
-		
-		if btnp(3) then
-		 t=0
-			c=c+1
-			if c==20 then c=3 end
-			if c==16 then c=c+1 end
-			music(0,c)
-		end
-		
-		if btnp(2) then
-		 t=0
-			c=c-1
-			if c==-1 then c=19 end
-			if c==16 then c=c-1 end
-			music(0,c)
-		end
-		
-		if t==7*64 then
-			c=c+1
-			t=0
-			if c==20 then c=3 end
-			if c==16 then c=c+1 end
-			music(0,c)
-			
-		end
-		
-	 f1=peek(0xFF9C)|((peek(0xFF9D)&0x0F)<<8)
-	 v1=peek(0xFF9D)>>4
-	 f2=peek(0xFFAE)|((peek(0xFFAF)&0x0F)<<8)
-	 v2=peek(0xFFAF)>>4
-	 f3=peek(0xFFC0)|((peek(0xFFC1)&0x0F)<<8)
-	 v3=peek(0xFFC1)>>4
-	 f4=peek(0xFFD2)|((peek(0xFFD3)&0x0F)<<8)
-	 v4=peek(0xFFD3)>>4
-	 fx1=(math.log(f1)-min)/(max-min)
-	 fx2=(math.log(f2)-min)/(max-min)
-	 fx3=(math.log(f3)-min)/(max-min)
-	 fx4=(math.log(f4)-min)/(max-min)
-	 cls(2)
-		--map(0,0,8,8,175,1)
-	 rect(1,1,82,134,0)
-	 rect(2,2,80,132,3)
-	 line(11,4,11,130,0)
-	 line(31,4,31,130,0)
-	 line(51,4,51,130,0)
-	 line(71,4,71,130,0)
-		line(12,4,12,130,7)
-	 line(32,4,32,130,7)
-	 line(52,4,52,130,7)
-	 line(72,4,72,130,7)
-	 rect(13-(v1/2),129-(fx1*124),v1,2,0)
-	 rect(33-(v2/2),129-(fx2*124),v2,2,0)
-	 rect(53-(v3/2),129-(fx3*124),v3,2,0)
-	 rect(73-(v4/2),129-(fx4*124),v4,2,0)
-	 rect(12-(v1/2),128-(fx1*124),v1,2,13) --136-136
-	 rect(32-(v2/2),128-(fx2*124),v2,2,6)
-	 rect(52-(v3/2),128-(fx3*124),v3,2,15)
-	 rect(72-(v4/2),128-(fx4*124),v4,2,11)
-	 rect(84,1,67,19,0)
-	 rect(84,21,67,19,0)
-	 rect(84,41,67,19,0)
-	 rect(84,61,67,19,0)
-	 w=0
-	 w1=0
-	 w2=0
-	 w3=0
-	 w4=0
-		i1=0
-		i2=0
-		i3=0
-		i4=0
-		w1=peek(0xFF9E+(i1%16))
-	 w2=peek(0xFFB0+(i2%16))
-	 w3=peek(0xFFC2+(i3%16))
-	 w4=peek(0xFFD4+(i4%16))
-	 while w<64 do
+function playMusic()
+
+	f1=peek(0xFF9C)|((peek(0xFF9D)&0x0F)<<8)
+	v1=peek(0xFF9D)>>4
+	f2=peek(0xFFAE)|((peek(0xFFAF)&0x0F)<<8)
+	v2=peek(0xFFAF)>>4
+	f3=peek(0xFFC0)|((peek(0xFFC1)&0x0F)<<8)
+	v3=peek(0xFFC1)>>4
+	f4=peek(0xFFD2)|((peek(0xFFD3)&0x0F)<<8)
+	v4=peek(0xFFD3)>>4
+	fx1=(math.log(f1)-min)/(max-min)
+	fx2=(math.log(f2)-min)/(max-min)
+	fx3=(math.log(f3)-min)/(max-min)
+	fx4=(math.log(f4)-min)/(max-min)
+	cls(1) --background tile color
+	--map(0,0,8,8,175,1)
+	rect(1,1,82,134,11) --border box left
+	rect(2,2,80,132,8) --color left box
+	line(11,4,11,130,3) --border 1st line
+	line(31,4,31,130,3) --border 2nd line
+	line(51,4,51,130,3) --border 3rd line
+	line(71,4,71,130,3) --border 4th line
+	line(12,4,12,130,7)
+	line(32,4,32,130,7)
+	line(52,4,52,130,7)
+	line(72,4,72,130,7)
+	rect(13-(v1/2),129-(fx1*124),v1,2,0) --shadows
+	rect(33-(v2/2),129-(fx2*124),v2,2,0)
+	rect(53-(v3/2),129-(fx3*124),v3,2,0)
+	rect(73-(v4/2),129-(fx4*124),v4,2,0)
+	rect(12-(v1/2),128-(fx1*124),v1,2,2) --1
+	rect(32-(v2/2),128-(fx2*124),v2,2,5) --2
+	rect(52-(v3/2),128-(fx3*124),v3,2,14) --3
+	rect(72-(v4/2),128-(fx4*124),v4,2,15) --4
+	rect(84,1,67,19,0) --backgrounds waveforms
+	rect(84,21,67,19,0)
+	rect(84,41,67,19,0)
+	rect(84,61,67,19,0)
+	w=0
+	w1=0
+	w2=0
+	w3=0
+	w4=0
+	i1=0
+	i2=0
+	i3=0
+	i4=0
+	w1=peek(0xFF9E+(i1%16))
+	w2=peek(0xFFB0+(i2%16))
+	w3=peek(0xFFC2+(i3%16))
+	w4=peek(0xFFD4+(i4%16))
+	while w<64 do
 		ww1=w1
 		ww2=w2
 		ww3=w3
@@ -485,32 +455,93 @@ function playMusicOne()
 		w3=peek(0xFFC2+(i3%16))
 		w4=peek(0xFFD4+(i4%16))
 		line(85+(w*1),(ww1/-16*(v1/15))+18,86+(w*1),(w1/-16*(v1/15))+18,2)
-		line(85+(w*1),(ww2/-16*(v2/15))+38,86+(w*1),(w2/-16*(v2/15))+38,1)
-		line(85+(w*1),(ww3/-16*(v3/15))+58,86+(w*1),(w3/-16*(v3/15))+58,3)
-		line(85+(w*1),(ww4/-16*(v4/15))+78,86+(w*1),(w4/-16*(v4/15))+78,5)
+		line(85+(w*1),(ww2/-16*(v2/15))+38,86+(w*1),(w2/-16*(v2/15))+38,5)
+		line(85+(w*1),(ww3/-16*(v3/15))+58,86+(w*1),(w3/-16*(v3/15))+58,14)
+		line(85+(w*1),(ww4/-16*(v4/15))+78,86+(w*1),(w4/-16*(v4/15))+78,15)
 		i1=i1+(f1/300)
 			i2=i2+(f2/300)
 			i3=i3+(f3/300)
 			i4=i4+(f4/300)
 			w=w+1
-	 end
-		rect(84,126,155,9,0)
-		rect(85,127,153*((c/20)+(t/(7*64)/19)),7,8)
-		i=0
-		while i<10 do
-			if str[1+i] ~= nil then
-				print(str[1+i],153,8*i+2,0)
-				print(str[1+i],152,8*i+1,10)
-			end
-		 i=i+1
+	end
+	rect(84,126,155,9,0) --Song Progress Bar Border
+	
+	-- song progress bar for every track
+	
+	if track==1 then
+		rect(85,127,153*((c/20)+(t/(2.4*64)/19)),7,15)
+	elseif track==2 then
+		rect(85,127,153*((c/20)+(t/(2.5*64)/19)),7,15)
+	elseif track==3 then
+		rect(85,127,153*((c/20)+(t/(1.6*64)/19)),7,15)
+	elseif track==4 then
+		rect(85,127,153*((c/20)+(t/(0.2*64)/19)),7,15)
+	elseif track==5 then
+		rect(85,127,153*((c/20)+(t/(5.8*64)/19)),7,15)
+	elseif track==6 then
+		rect(85,127,153*((c/20)+(t/(2.4*64)/19)),7,15) -- TODO
+	end
+	
+	rect(85,127,153*((c/20)+(t/(7*64)/19)),7,15) --Song Progress Bar
+	i=0
+	while i<10 do
+		if str[1+i] ~= nil then
+			print(str[1+i],153,8*i+2,10)
+			print(str[1+i],152,8*i+1,15)
 		end
-		i=0
-		
-		ii=ii+0.075
-
+		i=i+1
+	end
+	i=0
+	ii=ii+0.075
+	
+	-- back to musicbox-menu
+	
+	if track==1 then
+		if t==2928 then
+			music (1,0,7,false)
+			mode = mode_music
+			setRoomNr(42)
+		end
+	end
+	
+	if track==2 then
+		if t==3072 then
+			c=0
+			t=0
+		end
+	end
+	
+	if track==3 then
+		if t==1920 then
+			c=0
+			t=0
+		end
+	end
+	
+	if track==4 then
+		if t==240 then
+			music (1,0,7,false)
+			mode = mode_music
+			setRoomNr(42)
+		end
+	end
+	
+	if track==5 then
+		if t==7168 then
+			c=0
+			t=0
+		end
+	end
+	
+	if track==6 then -- TODO
+		if t==1920 then
+			c=0
+			t=0
+		end
+	end
 	
 	if btnp(6) or keyp(1) then
-		music()
+		music (1,0,7,false)
 		mode = mode_music
 		setRoomNr(42)
 	end
@@ -523,14 +554,33 @@ function music_player()
 	print("Press Key 1-6 to Start Music!",43,102,15)
 	print("Press A to go Back to Menu!",49,113,0)
 	print("Press A to go Back to Menu!",48,112,15)
+	track=0
 		
-	if btnp(5) or keyp(24) then
-		mode = mode_trackOne
+	if keyp(28) then
+		mode = mode_playMusic
+		str={
+		"- Main Menu -",
+		"",
+		"by kleeder",
+		"",
+		"",
+		}
+		min=math.log(16)
+		max=math.log(3951)
+		music (1,0,7,false)
+		t=0
+		c=0
+		i=0
+		ii=0
+		track=1
+	end
+	
+	if keyp(29) then
+		mode = mode_playMusic
 		str={
 		"- Overworld -",
 		"",
-		"by",
-		"   kleeder",
+		"by kleeder",
 		"",
 		"",
 		}
@@ -541,13 +591,88 @@ function music_player()
 		c=0
 		i=0
 		ii=0
-		
+		track=2
+	end
+	
+	if keyp(30) then
+		mode = mode_playMusic
+		str={
+		"- Underground -",
+		"",
+		"by kleeder",
+		"",
+		"",
+		}
+		min=math.log(16)
+		max=math.log(3951)
+		music (2,4,63,true)
+		t=0
+		c=0
+		i=0
+		ii=0
+		track=3
+	end
+	
+	if keyp(31) then
+		mode = mode_playMusic
+		str={
+		"- Course Clear -",
+		"",
+		"by kleeder",
+		"",
+		"",
+		}
+		min=math.log(16)
+		max=math.log(3951)
+		music (4,0,63,false)
+		t=0
+		c=0
+		i=0
+		ii=0
+		track=4
+	end
+	
+	if keyp(32) then
+		mode = mode_playMusic
+		str={
+		"- Finale -",
+		"",
+		"by kleeder",
+		"",
+		"",
+		}
+		min=math.log(16)
+		max=math.log(3951)
+		music (3,15,63,true)
+		t=0
+		c=0
+		i=0
+		ii=0
+		track=5
+	end
+	
+	if keyp(33) then
+		mode = mode_playMusic
+		str={
+		"- Ending -",
+		"",
+		"by kleeder",
+		"",
+		"",
+		}
+		min=math.log(16)
+		max=math.log(3951)
+		music (5,0,63,false)
+		t=0
+		c=0
+		i=0
+		ii=0
+		track=6
 	end
 
 	if btnp(6) or keyp(1) then
 	mode=mode_menu
 	setRoomNr(64)
-	music (1,0,7,false)
 	t = 0
 	end
 end
@@ -576,7 +701,6 @@ function mainMenu()
 	if btnp(6) or keyp(1) then
 		mode=mode_music
 		setRoomNr(42)
-		music()
 		return
 	end
 end
@@ -845,8 +969,8 @@ function TIC()
 		game_done()
 	elseif mode==mode_music then
 		music_player()
-	elseif mode==mode_trackOne then
-		playMusicOne()
+	elseif mode==mode_playMusic then
+		playMusic()
 	end
 	
 	t = t+1
@@ -857,6 +981,7 @@ function TIC()
 --print(t,84,84)
 --print(((inRoomNr-1)%8),84,84)
 --print(((inRoomNr-1)//8),120,84)
+--print(mode,84,84)
 	
 end
 
