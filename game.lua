@@ -244,10 +244,6 @@ function woolUpdate()
 		destroyWool()
 	end
 	
-	if isWoolInBlockId(160) or isWoolInBlockId(161) then
-		destroyWool()
-	end 
-	
 	-- gravity 
     if solidInRoom(w.x,w.y+8+w.vy, w.room) or solidInRoom(w.x+7,w.y+8+w.vy, w.room) then
         w.vy=0
@@ -459,10 +455,10 @@ function playMusic()
 		line(85+(w*1),(ww3/-16*(v3/15))+58,86+(w*1),(w3/-16*(v3/15))+58,14)
 		line(85+(w*1),(ww4/-16*(v4/15))+78,86+(w*1),(w4/-16*(v4/15))+78,15)
 		i1=i1+(f1/300)
-			i2=i2+(f2/300)
-			i3=i3+(f3/300)
-			i4=i4+(f4/300)
-			w=w+1
+		i2=i2+(f2/300)
+		i3=i3+(f3/300)
+		i4=i4+(f4/300)
+		w=w+1
 	end
 	rect(84,126,155,9,0) --Song Progress Bar Border
 	
