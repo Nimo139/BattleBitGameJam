@@ -17,7 +17,7 @@ mode_playMusic = 7
 mode_debug = false
 mode=mode_menu
 
-woolStringLength = {2400,200,200,200,100}  -- for each level
+woolStringLength = {2400,2000,2000,2000,1000}  -- for each level
 size = 0  --unnötig nötige variable für die destroy animation
 
 playerStartPos = {20, 0, 20, 0, 20, 0, 20, 0, 20, 0  }
@@ -74,7 +74,7 @@ end
 
 -- is block id solid? for wool
 function isSolidWool(id)
-	return id >= 32 and id <= 79 or id >= 241 and id <= 246 or id == 248--#032-#079: Solid // also id 253: destroy-block
+	return id >= 32 and id <= 79 or id == 248--#032-#079: Solid // also id 253: destroy-block
 end
 
 
@@ -141,8 +141,8 @@ end
 
 --check if a Sprite 8x8 touches a Block with the ID
 function isWoolInBlockId(id)
-	return isPointInBlockID(w.x+w.vx,w.y+w.vy, w.room, id) or isPointInBlockID(w.x+8,w.y+w.vy, w.room, id) 
-		or isPointInBlockID(w.x+8+w.vx,w.y+8+w.vy, w.room, id) or isPointInBlockID(w.x+w.vx,w.y+8+w.vy, w.room, id) 
+	return isPointInBlockID(w.x+w.vx+4,w.y+w.vy, w.room, id) or isPointInBlockID(w.x+4,w.y+w.vy, w.room, id) 
+		or isPointInBlockID(w.x+4+w.vx,w.y+4+w.vy, w.room, id) or isPointInBlockID(w.x+w.vx+4,w.y+4+w.vy, w.room, id) 
 
 end
 
