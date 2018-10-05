@@ -929,6 +929,8 @@ function level()
 		spr(261,p.x,p.y,0,1,p.o,0,0)			 -- landing sp 261
 	elseif p.vy<0 then
 		spr(260,p.x,p.y,0,1,p.o,0,0)           -- jumping sp 260
+	elseif btn(1) and btn(2) or btn(1) and btn(3) then
+		spr(268+t%80//40,p.x,p.y,0,1,p.o,0,0) --ducking & running sp 268-269
 	elseif btn(1) then
 		spr(266+t%80//40,p.x,p.y,0,1,p.o,0,0) --ducking sp 266-267
 	elseif p.vx==0 then
