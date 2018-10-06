@@ -20,8 +20,18 @@ mode=mode_menu
 woolStringLength = {2400,2000,2000,2000,1000}  -- for each level
 size = 0  --unnötig nötige variable für die destroy animation
 
-playerStartPos = {10, 88, 10, 0, 20, 0, 20, 0, 20, 0  }
-woolStartPos = {24, 88, 28, 0, 28, 0, 28, 0, 28, 0  } -- x,y, x2,y2   level 1 - 5 
+playerStartPos = {
+	{10, 88, 10, 0, 20, 0, 20, 0, 20, 0, 20, 0, 20, 0},  --level 1: Room 1 x,y, Room 2 x,y, x3,y3, ...
+	{10, 88, 10, 0, 20, 0, 20, 0, 20, 0, 20, 0, 20, 0},	 --level 2: ...
+	{10, 88, 10, 0, 20, 0, 20, 0, 20, 0, 20, 0, 20, 0},
+	{10, 88, 10, 0, 20, 0, 20, 0, 20, 0, 20, 0, 20, 0},
+	{10, 88, 10, 0, 20, 0, 20, 0, 20, 0, 20, 0, 20, 0}}
+woolStartPos = {
+	{24, 88, 28, 0, 20, 0, 20, 0, 20, 0, 20, 0, 20, 0},  --level 1:
+	{10, 88, 10, 0, 20, 0, 20, 0, 20, 0, 20, 0, 20, 0},	 --level 2: ...
+	{10, 88, 10, 0, 20, 0, 20, 0, 20, 0, 20, 0, 20, 0},
+	{10, 88, 10, 0, 20, 0, 20, 0, 20, 0, 20, 0, 20, 0},
+	{10, 88, 10, 0, 20, 0, 20, 0, 20, 0, 20, 0, 20, 0}}
 
 
 function init()
@@ -112,8 +122,8 @@ function spawnPlayer()
 	}
 	inRoomNr = 2 + levelCounter * 8 
 	
-	p.x = playerStartPos[(levelCounter) * 2 +1]
-	p.y = playerStartPos[(levelCounter) * 2 +2]
+	p.x = playerStartPos[(levelCounter+1)][1]
+	p.y = playerStartPos[(levelCounter+1)][2]
 end
 
 function spawnWool(currentRoom)
@@ -132,8 +142,8 @@ function spawnWool(currentRoom)
 		stringLength = 0
 	}
 	
-	w.x = woolStartPos[(levelCounter) * 2 +1]
-	w.y = woolStartPos[(levelCounter) * 2 +2]
+	w.x = woolStartPos[(levelCounter+1)][1]
+	w.y = woolStartPos[(levelCounter+1)][2]
 	
 	--w.stringLength = 
 end
@@ -212,16 +222,22 @@ end
 
 function respawn()
 	p.o= 0
-	p.x = playerStartPos[(levelCounter) * 2 +1]
-	p.y = playerStartPos[(levelCounter) * 2 +2]
+	--p.x = playerStartPos[(levelCounter) * 2 +1]
+	--p.y = playerStartPos[(levelCounter) * 2 +2]		
+	offset = inRoomNr - (2 + levelCounter * 8) 
+	
+	p.vy = 0
+	p.x = playerStartPos[(levelCounter+1)][1+offset*2]
+	p.y = playerStartPos[(levelCounter+1)][2+offset*2]
+	
 end
 
 function respawnLevel()
 	p.o= 0
 	inRoomNr = 2 + levelCounter * 8 
-	
-	p.x = playerStartPos[(levelCounter) * 2 +1]
-	p.y = playerStartPos[(levelCounter) * 2 +2]
+	p.vy = 0
+	p.x = playerStartPos[(levelCounter+1)][1]
+	p.y = playerStartPos[(levelCounter+1)][2]
 end
 
 
@@ -368,8 +384,8 @@ function resetLevel()
 	w.vx = 0
 	w.vy = 0
 	
-	w.x = woolStartPos[(levelCounter) * 2 +1]
-	w.y = woolStartPos[(levelCounter) * 2 +2]
+	w.x = woolStartPos[(levelCounter+1)][1]
+	w.y = woolStartPos[(levelCounter+1)][2]
 end 
 
 
@@ -377,8 +393,10 @@ function respawnWool()
 	w.vx = 0
 	w.vy = 0
 	
-	w.x = woolStartPos[(levelCounter) * 2 +1]   --anpassen für alle Raume
-	w.y = woolStartPos[(levelCounter) * 2 +2]
+	offset = inRoomNr - (2 + levelCounter * 8) --w.room??
+		
+	w.x = woolStartPos[(levelCounter+1)][1+offset*2]
+	w.y = woolStartPos[(levelCounter+1)][2+offset*2]
 	
 	w.track[inRoomNr][(w.length[w.room]-1)*2] = w.x
 	w.track[inRoomNr][(w.length[w.room]-1)*2+1] = w.y
