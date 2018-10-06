@@ -271,6 +271,7 @@ function woolUpdate()
 	end 
 	
 	if w.y > 128 then 
+		sfx(24,F5,-1,3,15,0)
 		respawnWool()
 	end
 	
@@ -352,6 +353,7 @@ end
 function throwWool()
 	if inRoomNr == w.room then
 		if sign((w.x-p.x)) == 1 and p.o == 0 or sign((w.x-p.x)) == -1 and p.o == 1 then
+			sfx(20,F5,-1,3,15,0)
 			w.vx = sign((w.x-p.x)) * 3    -- width: 3 
 			w.vy = -3 --(w.y-p.y) 		  -- height: 3
 		end
@@ -362,6 +364,7 @@ end
 function pullWool()
 	if inRoomNr == w.room then
 		if sign((w.x-p.x)) == 1 and p.o == 0 or sign((w.x-p.x)) == -1 and p.o == 1 then
+			sfx(21,F5,-1,3,15,0)
 			w.vx = sign((w.x-p.x)) * -2    -- width: 3 
 			w.vy = 0					   -- height: 0
 		end
@@ -435,6 +438,9 @@ function resetHandler()
 			print("reset level?", 4,7,15)
 			print(""..sc_reset.."/100", 16, 18, 0) 
 			print(""..sc_reset.."/100", 15, 17, 15)
+		end
+		if sc_reset == 99 then
+			sfx(25,C4,-1,3,15,0)
 		end
 		if sc_reset == 100 then
 			print("Reset!", 18, 28, 0)
@@ -861,6 +867,9 @@ function mainMenu()
 	-- delete progress
 	if levelCounter>0 then	
 		if key(18) then
+			if sc_reset == 99 then
+				sfx(25,C4,-1,3,15,0)
+			end
 			if sc_reset == 100 then
 				print("Deleted!", 49, 28, 0)
 				print("Deleted!", 48, 27, 15)
@@ -1038,7 +1047,8 @@ function level()
     
 	--Jumping 
     if p.vy == 0 and btnp(5) and btn0released or p.vy == 0 and keyp(58) and btn0released then 
-		p.vy=-2.5 
+		p.vy=-2.5
+		sfx(22,F5,-1,1,15,0)
 		btn0released = false  -- no permanent jumping
 	end
 	btn0released = not btn(5)
@@ -1055,6 +1065,7 @@ function level()
 	
 	-- respawn if p under map 
 	if p.y > 128 then
+		sfx(23,F5,-1,3,15,0)
 		respawn()
 	end
 	
@@ -1082,7 +1093,7 @@ function level()
 	dis = math.sqrt((w.x-p.x)^2 + (w.y-p.y)^2 ) 
 	if btn(1) and btnp(4) and dis < 9 or btn(1) and keyp(4) and dis < 9 then 
 		pullWool()
-	elseif not btn(1) and btnp(4) and dis < 16 or not btn(1) and keyp(4) and dis < 16 then	
+	elseif not btn(1) and btnp(4) and dis < 16 or not btn(1) and keyp(4) and dis < 16 then
 		throwWool()	
 	elseif btnp(4) and p.p ==  0 or keyp(4) and p.p ==  0 then 
 		p.p = 14

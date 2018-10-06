@@ -80,6 +80,12 @@ https://github.com/nesbox/TIC-80/wiki
 - 17: Crash
 - 18: RevCrash
 - 19: Snare
+- 20: Throw Wool
+- 21: Pull Wool
+- 22: Jump
+- 23: Player under map
+- 24: Wool under map
+- 25: Reset Complete
 
 ## Music:
 - Track 00:
