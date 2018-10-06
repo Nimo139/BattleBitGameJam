@@ -1195,13 +1195,13 @@ function TIC()
 -- DEBUG PRINTS
 
 --print(inRoomNr,84,84)
-print(t,84,84)
+--print(t,84,84)
 --print(t%64,84,84)
 --print(((inRoomNr-1)%8),84,84)
 --print(((inRoomNr-1)//8),120,84)
 --print(mode,84,84)
 --print(p.x,84,84,0)
-print(p.y,94,94,0)
+--print(p.y,94,94,0)
 	
 end
 
