@@ -22,17 +22,17 @@ woolStringLength = {2400,2000,2000,2000,1000}  -- for each level
 size = 0  --unnötig nötige variable für die destroy animation
 
 playerStartPos = {
-	{10, 88, 10, 0, 20, 0, 20, 0, 20, 0, 20, 0, 20, 0},  --level 1: Room 1 x,y, Room 2 x,y, x3,y3, ...
-	{10, 88, 10, 0, 20, 0, 20, 0, 20, 0, 20, 0, 20, 0},	 --level 2: ...
-	{10, 88, 10, 0, 20, 0, 20, 0, 20, 0, 20, 0, 20, 0},
-	{10, 88, 10, 0, 20, 0, 20, 0, 20, 0, 20, 0, 20, 0},
-	{10, 88, 10, 0, 20, 0, 20, 0, 20, 0, 20, 0, 20, 0}}
+	{10, 88, 10, 88, 10, 72, 10, 120, 0, 0, 0, 0, 0, 0},  --level 1: Room 1 x,y, Room 2 x,y, x3,y3, ...
+	{10, 120, 10, 120, 10, 112, 10, 104, 10, 0, 10, 0, 10, 0},	 --level 2: ...
+	{10, 88, 10, 0, 10, 0, 10, 0, 10, 0, 10, 0, 10, 0},
+	{10, 88, 10, 0, 10, 0, 10, 0, 10, 0, 10, 0, 10, 0},
+	{10, 88, 10, 0, 10, 0, 10, 0, 10, 0, 10, 0, 10, 0}}
 woolStartPos = {
-	{24, 88, 28, 0, 20, 0, 20, 0, 20, 0, 20, 0, 20, 0},  --level 1:
-	{10, 88, 10, 0, 20, 0, 20, 0, 20, 0, 20, 0, 20, 0},	 --level 2: ...
-	{10, 88, 10, 0, 20, 0, 20, 0, 20, 0, 20, 0, 20, 0},
-	{10, 88, 10, 0, 20, 0, 20, 0, 20, 0, 20, 0, 20, 0},
-	{10, 88, 10, 0, 20, 0, 20, 0, 20, 0, 20, 0, 20, 0}}
+	{24, 88, 24, 88, 24, 72, 24, 120, 0, 0, 0, 0, 0, 0},  --level 1:
+	{24, 120, 24, 120, 24, 112, 24, 104, 24, 0, 24, 0, 24, 0},	 --level 2: ...
+	{24, 88, 24, 0, 24, 0, 24, 0, 24, 0, 24, 0, 24, 0},
+	{24, 88, 24, 0, 24, 0, 24, 0, 24, 0, 24, 0, 24, 0},
+	{24, 88, 24, 0, 24, 0, 24, 0, 24, 0, 24, 0, 24, 0}}
 
 
 function init()
@@ -212,7 +212,8 @@ end
 function woolInGoal(x,y)
 	if mget2((x)//8,(y)//8, w.room) == 254 or mget2((x)//8,(y)//8, w.room) == 253 or mget2((x)//8,(y)//8, w.room) == 252 then 
 		--set wool state to small/ fix pos -> end
-		print("Level cleared",100,60)
+		print("Level cleared!",81,26,0)
+		print("Level cleared!",80,25,15)
 		spr(255, (x//8)*8, (y//8)*8, 2, 1, 0, 0, 1, 1)
 		w.size = 3
 		w.goal = true
@@ -299,7 +300,8 @@ function woolUpdate()
 	end
 	
 	if w.size <= 1 and w.respawn == false then 
-		print("Wool empty!" ,100,60)
+		print("Wool empty!",81,36,0)
+		print("Wool empty!",80,35,15)
 		w.vx=0
 		--w.vy=0
 	end		
@@ -346,12 +348,12 @@ function sign(int)
 end
 	
 	
--- vector from cat to wool    es gibt ja nur noch p.o mit 0 nacht rechts und 1 nach links, wenn (w.x-p.x) positiv ist muss p.o 0 sein und sonst 1
+-- vector from cat to wool
 function throwWool()
 	if inRoomNr == w.room then
-		if sign((w.x-p.x)) == 1 and p.o == 0 or sign((w.x-p.x)) == -1 and p.o == 1 then -- überlege verinfachung 
-			w.vx = sign((w.x-p.x)) * 3    -- Weite: 3 
-			w.vy = -3 --(w.y-p.y) 		  -- Hoehe: 3
+		if sign((w.x-p.x)) == 1 and p.o == 0 or sign((w.x-p.x)) == -1 and p.o == 1 then
+			w.vx = sign((w.x-p.x)) * 3    -- width: 3 
+			w.vy = -3 --(w.y-p.y) 		  -- height: 3
 		end
 		p.p = 14
 	end
@@ -360,8 +362,8 @@ end
 function pullWool()
 	if inRoomNr == w.room then
 		if sign((w.x-p.x)) == 1 and p.o == 0 or sign((w.x-p.x)) == -1 and p.o == 1 then
-			w.vx = sign((w.x-p.x)) * -2    -- Weite: 3 
-			w.vy = 0					  -- Hoehe: 0
+			w.vx = sign((w.x-p.x)) * -2    -- width: 3 
+			w.vy = 0					   -- height: 0
 		end
 		p.p = 14
 	end
@@ -427,23 +429,25 @@ function resetHandler()
 		--reset room
 		respawnWool()
 		respawn()
-		
-		sc_reset=sc_reset+1
 		--reset full level?
-		if sc_reset > 100 then
-			print("Reset!", 29, 28, 0)
-			print("Reset!", 28, 27, 15)
+		if sc_reset > 0 then
+			print("reset level?", 5,8,0)
+			print("reset level?", 4,7,15)
+			print(""..sc_reset.."/100", 16, 18, 0) 
+			print(""..sc_reset.."/100", 15, 17, 15)
+		end
+		if sc_reset == 100 then
+			print("Reset!", 18, 28, 0)
+			print("Reset!", 17, 27, 15)
 			resetLevel(levelCounter)
 			resetLevel()    --overloading of func name :/
 			respawnLevel()
 			sc_reset=100
+		else
+			sc_reset=sc_reset+1
 		end
-		print("delete progress?", 5,8,0)
-		print("delete progress?", 4,7,15)
-		print(""..sc_reset.."/100", 31, 18, 0) 
-		print(""..sc_reset.."/100", 30, 17, 15) 
 	else
-		sc_reset=0
+		sc_reset=-25
 	end
 	
 
@@ -455,10 +459,6 @@ function resetHandler()
 
 
 end
-
-
-
-
 
 
 --Map stuff
@@ -854,28 +854,37 @@ function mainMenu()
 	-- delete progress
 	if levelCounter>0 then	
 		if key(18) then
-			sc_reset=sc_reset+1
-			if sc_reset > 100 then
+			if sc_reset == 100 then
 				print("Deleted!", 49, 28, 0)
 				print("Deleted!", 48, 27, 15)
 				levelCounter = 0
 				pmem(1, levelCounter)
 				sc_reset=100
+			else
+				sc_reset=sc_reset+1
 			end
 			print("delete progress?", 25,8,0)
 			print("delete progress?", 24,7,15)
 			print(""..sc_reset.."/100", 51, 18, 0) 
-			print(""..sc_reset.."/100", 50, 17, 15) 
-			else
-				sc_reset=0
-				print("Press Key R", 34,8,0)
-				print("Press Key R", 33,7,15)
-				print("to delete", 41,18,0)
-				print("to delete", 40,17,15)
-				print("your Progress!", 26,28,0)
-				print("your Progress!", 25,27,15)
-			end
+			print(""..sc_reset.."/100", 50, 17, 15)			
 		else
+			sc_reset=0
+			print("Press Key R", 34,8,0)
+			print("Press Key R", 33,7,15)
+			print("to delete", 41,18,0)
+			print("to delete", 40,17,15)
+			print("your Progress!", 26,28,0)
+			print("your Progress!", 25,27,15)
+		end
+	elseif key(18) and sc_reset == 100 then
+		print("Deleted!", 49, 28, 0)
+		print("Deleted!", 48, 27, 15)
+		print("delete progress?", 25,8,0)
+		print("delete progress?", 24,7,15)
+		print(""..sc_reset.."/100", 51, 18, 0) 
+		print(""..sc_reset.."/100", 50, 17, 15)	
+	else
+		sc_reset=0
 		print("Press Key Q", 34,8,0)
 		print("Press Key Q", 33,7,15)
 		print("to view Controls", 23,18,0)
@@ -899,10 +908,10 @@ function clear_cutscene()
 	end
 end
 	
-function game_done()
+function game_done() --TODO
 
-	print("Congratz, you won the game ;D",10,10,14)
-	print("press X to continue!",100,110,14)
+	print("Congratz, you won the game ;D",10,10,15)
+	print("press X to continue!",100,110,15)
 	if btnp(5) or keyp(24) then
 		mode=mode_menu
 		setRoomNr(64)
@@ -1163,6 +1172,8 @@ function TIC()
 --print(((inRoomNr-1)%8),84,84)
 --print(((inRoomNr-1)//8),120,84)
 --print(mode,84,84)
+--print(p.x,84,84,0)
+print(p.y,94,94,0)
 	
 end
 
