@@ -351,8 +351,11 @@ end
 
 function respawnWool()
 	w.room = 2 + levelCounter * 8 
-	w.track[w.room] = {}
-	w.length[w.room] = 0
+	for i = 0, 6, 1 do 
+		w.track[w.room + i] = {}
+		w.length[w.room + i] = 0
+	end
+	
 	w.stringLength = 0
 	
 	w.vx = 0
