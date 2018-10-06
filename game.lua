@@ -716,6 +716,30 @@ function mainMenu()
 		setRoomNr(42)
 		return
 	end
+	
+	-- delete progress
+	if key(18) then
+		sc_reset=sc_reset+1
+		if sc_reset > 100 then
+			print("Deleted!", 29, 28, 0)
+			print("Deleted!", 28, 27, 15)
+			levelCounter = 0
+			pmem(1, levelCounter)
+			sc_reset=100
+		end
+		print("delete progress?", 5,8,0)
+		print("delete progress?", 4,7,15)
+		print(""..sc_reset.."/100", 31, 18, 0) 
+		print(""..sc_reset.."/100", 30, 17, 15) 
+	else
+		sc_reset=0
+		print("Press Key R", 16,8,0)
+		print("Press Key R", 15,7,15)
+		print("to delete", 21,18,0)
+		print("to delete", 20,17,15)
+		print("your Progress!", 6,28,0)
+		print("your Progress!", 5,27,15)
+	end
 end
 
 function clear_cutscene()
