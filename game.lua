@@ -701,11 +701,11 @@ function mainMenu()
 		print("Press A for Musicbox!",116,46,0)
 		print("Press A for Musicbox!",115,45,15)
 	end
-	print("Ver 0.5",0,130,15,true,1,true)
+	print("Ver 0.6",0,130,15,true,1,true)
 	print("by kleeder, Nimo, BotA and alili1996",53,130,15)
-	spr(432,5,2,0,1,0,0,8,5) --1
-	spr(352,88,2,0,1,0,0,8,5) --2
-	spr(360,170,2,0,1,0,0,8,5) --3
+	--spr(432,5,2,0,1,0,0,8,5) --1
+	spr(352,128,5,0,1,0,0,8,5) --Logo
+	--spr(360,170,2,0,1,0,0,8,5) --3
 
 	if btnp(5) or keyp(24) then
 		init()
@@ -718,6 +718,30 @@ function mainMenu()
 		mode=mode_music
 		setRoomNr(42)
 		return
+	end
+	
+	-- delete progress
+	if key(18) then
+		sc_reset=sc_reset+1
+		if sc_reset > 100 then
+			print("Deleted!", 49, 28, 0)
+			print("Deleted!", 48, 27, 15)
+			levelCounter = 0
+			pmem(1, levelCounter)
+			sc_reset=100
+		end
+		print("delete progress?", 25,8,0)
+		print("delete progress?", 24,7,15)
+		print(""..sc_reset.."/100", 51, 18, 0) 
+		print(""..sc_reset.."/100", 50, 17, 15) 
+	else
+		sc_reset=0
+		print("Press Key R", 36,8,0)
+		print("Press Key R", 35,7,15)
+		print("to delete", 41,18,0)
+		print("to delete", 40,17,15)
+		print("your Progress!", 26,28,0)
+		print("your Progress!", 25,27,15)
 	end
 end
 
