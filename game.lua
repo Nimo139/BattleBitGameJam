@@ -698,7 +698,7 @@ function mainMenu()
 		print("Press A for Musicbox!",116,46,0)
 		print("Press A for Musicbox!",115,45,15)
 	end
-	print("Ver 0.5",0,130,15,true,1,true)
+	print("Ver 0.6",0,130,15,true,1,true)
 	print("by kleeder, Nimo, BotA and alili1996",53,130,15)
 	--spr(432,5,2,0,1,0,0,8,5) --1
 	spr(352,128,5,0,1,0,0,8,5) --Logo
