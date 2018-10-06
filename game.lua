@@ -246,7 +246,7 @@ function woolUpdate()
 		w.vx = w.vx - 1 
 	end 
 	
-	if w.y > 240 then 
+	if w.y > 128 then 
 		respawnWool()
 	end
 	
@@ -303,7 +303,7 @@ function woolUpdate()
 	end
 	--print(math.ceil(((woolStringLength[levelCounter+1] - w.stringLength) / woolStringLength[levelCounter+1]) * 4) ,100,110,14)
 	--print(w.length[inRoomNr] ,140,110,14)
-	--print(woolStringLength[levelCounter+1] ,80,110,14)
+	--print(w.y ,80,110,14)
 
 
 	
@@ -902,7 +902,7 @@ function level()
     
 	
 	-- respawn if p under map 
-	if p.y > 200 then
+	if p.y > 128 then
 		respawn()
 	end
 	
