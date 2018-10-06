@@ -603,6 +603,7 @@ function playMusic()
 			music (1,0,7,false)
 			mode = mode_music
 			setRoomNr(42)
+			t=0
 		end
 	end
 	
@@ -625,6 +626,7 @@ function playMusic()
 			music (1,0,7,false)
 			mode = mode_music
 			setRoomNr(42)
+			t=0
 		end
 	end
 	
@@ -646,6 +648,7 @@ function playMusic()
 		music (1,0,7,false)
 		mode = mode_music
 		setRoomNr(42)
+		t=0
 	end
 end
 
@@ -773,7 +776,6 @@ function music_player()
 	if btnp(6) or keyp(1) then
 	mode=mode_menu
 	setRoomNr(64)
-	t = 0
 	end
 end
 
@@ -821,7 +823,14 @@ end
 
 function mainMenu()
 
-	if t%80 < 40 then
+	if t>224 then
+		if t%64 < 32 then
+			spr(360,128,0,0,1,0,0,8,5) --3
+		else
+			spr(352,128,0,0,1,0,0,8,5) --Logo
+		end
+	end
+	if t%64 < 32 then
 		print("Press X to Start!",11,46,0)
 		print("Press X to Start!",10,45,15)
 		print("Press A for Musicbox!",116,46,0)
@@ -830,8 +839,6 @@ function mainMenu()
 	print("Ver 0.6",0,130,15,true,1,true)
 	print("by kleeder, Nimo, BotA and alili1996",53,130,15)
 	--spr(432,5,2,0,1,0,0,8,5) --1
-	spr(352,128,5,0,1,0,0,8,5) --Logo
-	--spr(360,170,2,0,1,0,0,8,5) --3
 
 	if btnp(5) or keyp(24) then
 		init()
@@ -885,10 +892,10 @@ function mainMenu()
 		print(""..sc_reset.."/100", 50, 17, 15)	
 	else
 		sc_reset=0
-		print("Press Key Q", 34,8,0)
-		print("Press Key Q", 33,7,15)
-		print("to view Controls", 23,18,0)
-		print("to view Controls", 22,17,15)
+		print("Press Key Q", 34,13,0)
+		print("Press Key Q", 33,12,15)
+		print("to view Controls", 23,23,0)
+		print("to view Controls", 22,22,15)
 	end
 end
 
@@ -1168,7 +1175,8 @@ function TIC()
 -- DEBUG PRINTS
 
 --print(inRoomNr,84,84)
---print(t,84,84)
+print(t,84,84)
+--print(t%64,84,84)
 --print(((inRoomNr-1)%8),84,84)
 --print(((inRoomNr-1)//8),120,84)
 --print(mode,84,84)
