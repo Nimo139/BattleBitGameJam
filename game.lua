@@ -239,9 +239,11 @@ function woolUpdate()
 	elseif w.x > 240 then 
 		w.x = w.x - 240
 		w.room = w.room + 1
+		w.vx = w.vx + 1 
 	elseif w.x < 0 and w.room > 1 then
 		w.x = 232
 		w.room = w.room - 1
+		w.vx = w.vx - 1 
 	end 
 	
 	if w.y > 240 then 
