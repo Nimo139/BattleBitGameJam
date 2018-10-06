@@ -1091,16 +1091,22 @@ function level()
 	end
 	
 	-- wool left/right?
-    if woolRight(p.x,p.y) and inRoomNr == w.room then
-        w.vx=1
-    elseif woolLeft(p.x,p.y) and inRoomNr == w.room  then
-        w.vx=-1
+	if btn(1) then 
+		fac = 0.4
+	else 
+		fac = 1
+	end
+	
+    if woolRight(p.x,p.y) and inRoomNr == w.room and p.p == 0 then
+        w.vx=fac
+    elseif woolLeft(p.x,p.y) and inRoomNr == w.room   and p.p == 0  then
+        w.vx=-fac
     else  
 		w.vx= w.vx - w.vx/10
 	end
 	
 	dis = math.sqrt((w.x-p.x)^2 + (w.y-p.y)^2 ) 
-	if btn(1) and btnp(4) and dis < 9 or btn(1) and keyp(4) and dis < 9 then 
+	if btn(1) and btnp(4) and dis < 16 or btn(1) and keyp(4) and dis < 16 then 
 		pullWool()
 	elseif not btn(1) and btnp(4) and dis < 16 or not btn(1) and keyp(4) and dis < 16 then
 		throwWool()	
