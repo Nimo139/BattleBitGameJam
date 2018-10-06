@@ -212,12 +212,18 @@ end
 
 function respawn()
 	p.o= 0
+	p.x = playerStartPos[(levelCounter) * 2 +1]
+	p.y = playerStartPos[(levelCounter) * 2 +2]
+end
+
+function respawnLevel()
+	p.o= 0
 	inRoomNr = 2 + levelCounter * 8 
 	
 	p.x = playerStartPos[(levelCounter) * 2 +1]
 	p.y = playerStartPos[(levelCounter) * 2 +2]
-	--print(p.y,128,84)
 end
+
 
 
 function resetLevel(levelCounter)
@@ -349,7 +355,8 @@ function destroyWool()
 	w.respawn = true
 end
 
-function respawnWool()
+
+function resetLevel()
 	w.room = 2 + levelCounter * 8 
 	for i = 0, 6, 1 do 
 		w.track[w.room + i] = {}
@@ -363,7 +370,21 @@ function respawnWool()
 	
 	w.x = woolStartPos[(levelCounter) * 2 +1]
 	w.y = woolStartPos[(levelCounter) * 2 +2]
+end 
+
+
+function respawnWool()
+	w.vx = 0
+	w.vy = 0
+	
+	w.x = woolStartPos[(levelCounter) * 2 +1]   --anpassen für alle Raume
+	w.y = woolStartPos[(levelCounter) * 2 +2]
+	
+	w.track[inRoomNr][(w.length[w.room]-1)*2] = w.x
+	w.track[inRoomNr][(w.length[w.room]-1)*2+1] = w.y
+	
 end
+
 
 function drawWoolString(x, y)
 	if w.length[inRoomNr] > 1 then
@@ -379,6 +400,47 @@ function drawWoolString(x, y)
 end
 
 -- WOOL END
+
+
+function resetHandler()
+	-- reset progress
+	if btn(6) or key(18) then
+		--reset room
+		respawnWool()
+		respawn()
+		
+		sc_reset=sc_reset+1
+		--reset full level?
+		if sc_reset > 100 then
+			print("Reset!", 29, 28, 0)
+			print("Reset!", 28, 27, 15)
+			resetLevel(levelCounter)
+			resetLevel()    --overloading of func name :/
+			respawnLevel()
+			sc_reset=100
+		end
+		print("delete progress?", 5,8,0)
+		print("delete progress?", 4,7,15)
+		print(""..sc_reset.."/100", 31, 18, 0) 
+		print(""..sc_reset.."/100", 30, 17, 15) 
+	else
+		sc_reset=0
+	end
+	
+
+	--if  btnp(6) or keyp(18) then
+	--	resetLevel(levelCounter)
+	--	respawnWool()
+	--	respawn()
+	-- end
+
+
+end
+
+
+
+
+
 
 --Map stuff
 
@@ -942,11 +1004,8 @@ function level()
 	woolUpdate()
 	
 	--Reset Level if Stuck
-	if btnp(6) or keyp(18) then
-		resetLevel(levelCounter)
-		respawnWool()
-		respawn()
-	end
+	resetHandler()
+	
 	
 	--cam.x=math.min(120,lerp(cam.x,120-p.x,0.05))
 	--cam.y=math.min(64,lerp(cam.y,64-p.y,0.05))
