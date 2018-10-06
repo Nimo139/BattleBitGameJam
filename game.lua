@@ -14,6 +14,7 @@ mode_music = 4
 mode_clear = 5
 mode_done = 6
 mode_playMusic = 7
+mode_controls = 8
 mode_debug = false
 mode=mode_menu
 
@@ -648,8 +649,6 @@ function playMusic()
 	end
 end
 
--- MUSIC END
-
 function music_player()
 	print("Press Key 1-6 to Start Music!",44,103,0)
 	print("Press Key 1-6 to Start Music!",43,102,15)
@@ -778,6 +777,48 @@ function music_player()
 	end
 end
 
+-- MUSIC END
+
+function controls()
+	print("Controls:", 96,23,0)
+	print("Controls:", 95,22,15)
+	print("Arrows L/R:", 36,36,0)
+	print("Arrows L/R:", 35,35,15)
+	print("Move", 151,36,0)
+	print("Move", 150,35,15)
+	print("Arrow up:", 36,46,0)
+	print("Arrow up:", 35,45,15)
+	print("Jump", 151,46,0)
+	print("Jump", 150,45,15)
+	print("Arrow down:", 36,56,0)
+	print("Arrow down:", 35,55,15)
+	print("Sneak", 151,56,0)
+	print("Sneak", 150,55,15)
+	print("D:", 36,66,0)
+	print("D:", 35,65,15)
+	print("Throw Wool", 151,66,0)
+	print("Throw Wool", 150,65,15)
+	print("D + Sneak (near Wool):", 36,76,0)
+	print("D + Sneak (near Wool):", 35,75,15)
+	print("Pull Wool", 151,76,0)
+	print("Pull Wool", 150,75,15)
+	print("R:", 36,86,0)
+	print("R:", 35,85,15)
+	print("Reset Room", 151,86,0)
+	print("Reset Room", 150,85,15)
+	print("R (hold):", 36,96,0)
+	print("R (hold):", 35,95,15)
+	print("Reset Level", 151,96,0)
+	print("Reset Level", 150,95,15)
+	print("Press Q to go Back to Menu!", 48,111,0)
+	print("Press Q to go Back to Menu!", 47,110,15)
+	
+	if keyp(17) then
+		setRoomNr(64)
+		mode = mode_menu
+	end
+end
+
 function mainMenu()
 
 	if t%80 < 40 then
@@ -805,28 +846,40 @@ function mainMenu()
 		return
 	end
 	
+	if keyp(17) then
+		setRoomNr(63)
+		mode=mode_controls
+	end
+	
 	-- delete progress
-	if key(18) then
-		sc_reset=sc_reset+1
-		if sc_reset > 100 then
-			print("Deleted!", 49, 28, 0)
-			print("Deleted!", 48, 27, 15)
-			levelCounter = 0
-			pmem(1, levelCounter)
-			sc_reset=100
-		end
-		print("delete progress?", 25,8,0)
-		print("delete progress?", 24,7,15)
-		print(""..sc_reset.."/100", 51, 18, 0) 
-		print(""..sc_reset.."/100", 50, 17, 15) 
-	else
-		sc_reset=0
-		print("Press Key R", 36,8,0)
-		print("Press Key R", 35,7,15)
-		print("to delete", 41,18,0)
-		print("to delete", 40,17,15)
-		print("your Progress!", 26,28,0)
-		print("your Progress!", 25,27,15)
+	if levelCounter>0 then	
+		if key(18) then
+			sc_reset=sc_reset+1
+			if sc_reset > 100 then
+				print("Deleted!", 49, 28, 0)
+				print("Deleted!", 48, 27, 15)
+				levelCounter = 0
+				pmem(1, levelCounter)
+				sc_reset=100
+			end
+			print("delete progress?", 25,8,0)
+			print("delete progress?", 24,7,15)
+			print(""..sc_reset.."/100", 51, 18, 0) 
+			print(""..sc_reset.."/100", 50, 17, 15) 
+			else
+				sc_reset=0
+				print("Press Key R", 34,8,0)
+				print("Press Key R", 33,7,15)
+				print("to delete", 41,18,0)
+				print("to delete", 40,17,15)
+				print("your Progress!", 26,28,0)
+				print("your Progress!", 25,27,15)
+			end
+		else
+		print("Press Key Q", 34,8,0)
+		print("Press Key Q", 33,7,15)
+		print("to view Controls", 23,18,0)
+		print("to view Controls", 22,17,15)
 	end
 end
 
@@ -1097,6 +1150,8 @@ function TIC()
 		music_player()
 	elseif mode==mode_playMusic then
 		playMusic()
+	elseif mode==mode_controls then
+		controls()
 	end
 	
 	t = t+1
