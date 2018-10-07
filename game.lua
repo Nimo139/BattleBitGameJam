@@ -81,12 +81,12 @@ end
 
 -- is block id solid?  for player
 function isSolid(id)
-	return id >= 1 and id <= 79 or id >= 241 and id <= 246 or id >= 232 and id <= 234 or id == 247--#032-#079: Solid // also id 253: destroy-block
+	return id >= 1 and id <= 79 or id >= 227 and id <= 230 or id >= 241 and id <= 246 or id >= 232 and id <= 234 or id == 247--#032-#079: Solid // also id 253: destroy-block
 end
 
 -- is block id solid? for wool
 function isSolidWool(id)
-	return id >= 1 and id <= 79 or id >= 248 and id <= 250 --#032-#079: Solid // also id 253: destroy-block
+	return id >= 1 and id <= 79 or id >= 248 and id <= 251 --#032-#079: Solid // also id 253: destroy-block
 end
 
 function ishalfSolidWool(id)
@@ -241,7 +241,7 @@ function woolLeft(x,y)
 end
 
 function woolInGoal(x,y)
-	if mget2((x)//8,(y)//8, w.room) == 254 or mget2((x)//8,(y)//8, w.room) == 253 or mget2((x)//8,(y)//8, w.room) == 252 then 
+	if mget2((x)//8,(y)//8, w.room) == 254 or mget2((x)//8,(y)//8, w.room) == 253 or mget2((x)//8,(y)//8, w.room) == 252 or mget2((x)//8,(y)//8, w.room) == 238 then 
 		--set wool state to small/ fix pos -> end
 		print("Level cleared!",81,26,0)
 		print("Level cleared!",80,25,15)
@@ -310,7 +310,7 @@ function woolUpdate()
 	
 	--specialBlocks 
 	--destroy
-	if isWoolInBlockId(241) or isWoolInBlockId(242) or isWoolInBlockId(243) or isWoolInBlockId(244) or isWoolInBlockId(245) or isWoolInBlockId(246) then
+	if isWoolInBlockId(227) or isWoolInBlockId(228) or isWoolInBlockId(229) or isWoolInBlockId(230) or isWoolInBlockId(241) or isWoolInBlockId(242) or isWoolInBlockId(243) or isWoolInBlockId(244) or isWoolInBlockId(245) or isWoolInBlockId(246) then
 		destroyWool()
 	end
 	
@@ -520,7 +520,7 @@ function animateBlocks()
 	-- animation with 2 sprites, second spirte should have the id + 1   
 	-- use the first sprite in the map editor
 	 
-	animatiedBlocks = {160}  -- only the first id, that is on the map   (lava, water) 
+	animatiedBlocks = {160, 192, 208}  -- only the first id, that is on the map   (lava, water) 
 	
 	for y = 0,17,1 do
 		for x = 0,30,1 do
