@@ -37,8 +37,8 @@ woolStartPos = {
 
 function init()
     solids={[2]=true,[3]=true}
-	levelCounter = 1 -- increments after every finished level
-	--levelCounter = pmem(1) --loading save
+	levelCounter = 0 -- increments after every finished level
+	levelCounter = pmem(1) --loading save
 	music (1,0,7,false) --menu theme
 	p={
 	x=0,
@@ -891,7 +891,7 @@ function mainMenu()
 		print("Press A for Musicbox!",116,46,0)
 		print("Press A for Musicbox!",115,45,15)
 	end
-	print("Ver 0.6",0,130,15,true,1,true)
+	print("Ver 1.0",0,130,15,true,1,true)
 	print("by kleeder, Nimo, BotA and alili1996",53,130,15)
 	--spr(432,5,2,0,1,0,0,8,5) --1
 
