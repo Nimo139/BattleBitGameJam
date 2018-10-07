@@ -15,10 +15,10 @@ mode_clear = 5
 mode_done = 6
 mode_playMusic = 7
 mode_controls = 8
-mode_debug = true
+mode_debug = false
 mode=mode_menu
 
-woolStringLength = {2400,2000,2000,2000,1000}  -- for each level
+woolStringLength = {2400,2000,2500,2000,1000}  -- for each level
 size = 0  --unnötig nötige variable für die destroy animation
 
 playerStartPos = {
