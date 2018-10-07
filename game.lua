@@ -15,7 +15,7 @@ mode_clear = 5
 mode_done = 6
 mode_playMusic = 7
 mode_controls = 8
-mode_debug = false
+mode_debug = true
 mode=mode_menu
 
 woolStringLength = {2400,2000,2000,2000,1000}  -- for each level
@@ -121,7 +121,8 @@ end
 
 
 function getGroundHeight(x, y)
-	while (not solidInRoom(x ,y , w.room)) and (not solidInRoom(x-1 ,y , w.room)) and y < 132 do      -- 240 under level  
+	while (not solidInRoom(x ,y , w.room)  and (not halfSolidInRoom(x ,y , w.room))) 
+		 and (not solidInRoom(x-1 ,y , w.room) and (not halfSolidInRoom(x-1 ,y , w.room))) and y < 132 do      -- 240 under level  
 		y = y + 1
 	end
 	return y
