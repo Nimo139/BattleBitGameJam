@@ -1025,7 +1025,7 @@ function prelevel()
 		mode=mode_level
 		if levelCounter == 4 then
 		music (3,15,63,true)
-		elseif levelCounter == 3 then
+		elseif levelCounter == 2 or levelCounter == 3 then
 		music (2,4,63,true)
 		else
 		music (0,0,47,true)
