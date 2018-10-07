@@ -88,6 +88,10 @@ function isSolidWool(id)
 	return id >= 32 and id <= 79 or id == 248--#032-#079: Solid // also id 253: destroy-block
 end
 
+function ishalfSolidWool(id)
+	return id >= 80 and id <= 111
+end
+
 function isHalfSolid(id)
 	return id >= 80 and id <= 111
 end
@@ -109,6 +113,10 @@ end
 
 function solidInRoom(x,y, room)
     return isSolidWool(mget2((x)//8,(y)//8, room))
+end
+
+function halfSolidInRoom(x,y, room)
+    return ishalfSolidWool(mget2((x)//8,(y)//8, room))
 end
 
 
@@ -305,7 +313,7 @@ function woolUpdate()
 	end
 	
 	-- gravity 
-    if solidInRoom(w.x,w.y+8+w.vy, w.room) or solidInRoom(w.x+7,w.y+8+w.vy, w.room) then
+    if solidInRoom(w.x,w.y+8+w.vy, w.room) or solidInRoom(w.x+7,w.y+8+w.vy, w.room) or halfSolidInRoom(w.x,w.y+8+w.vy, w.room) or halfSolidInRoom(w.x+7,w.y+8+w.vy, w.room) then
         w.vy=0
     else
         w.vy=w.vy+0.2
