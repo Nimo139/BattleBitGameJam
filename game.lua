@@ -15,7 +15,7 @@ mode_clear = 5
 mode_done = 6
 mode_playMusic = 7
 mode_controls = 8
-mode_debug = true
+mode_debug = false
 mode=mode_menu
 
 woolStringLength = {2400,2000,2000,2000,1000}  -- for each level
@@ -316,7 +316,7 @@ function woolUpdate()
     if solidInRoom(w.x,w.y+8+w.vy, w.room) or solidInRoom(w.x+7,w.y+8+w.vy, w.room) then
         w.vy=0
     elseif halfSolidInRoom(w.x,w.y+8+w.vy, w.room) or halfSolidInRoom(w.x+7,w.y+8+w.vy, w.room) then
-		w.vy=0
+		w.vy=math.min(0, w.vy)
 	else
         w.vy=w.vy+0.2
     end
@@ -1087,7 +1087,7 @@ function level()
         p.vy=0
 		p.f = 0
     elseif halfSolid(p.x,p.y+8+p.vy) or halfSolid(p.x+7,p.y+8+p.vy) then
-		p.vy=p.vy+0.2
+		p.vy=math.min(0,p.vy)
 		p.f = 0
 	else
         p.vy=p.vy+0.2
