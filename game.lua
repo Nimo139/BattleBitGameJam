@@ -38,7 +38,7 @@ woolStartPos = {
 function init()
     solids={[2]=true,[3]=true}
 	levelCounter = pmem(1) -- increments after every finished level
-	--levelCounter = 1
+	--levelCounter = 5
 	music (1,0,7,false) --menu theme
 	p={
 	x=0,
@@ -81,12 +81,12 @@ end
 
 -- is block id solid?  for player
 function isSolid(id)
-	return id >= 32 and id <= 79 or id >= 241 and id <= 246 or id == 247--#032-#079: Solid // also id 253: destroy-block
+	return id >= 1 and id <= 79 or id >= 241 and id <= 246 or id == 247--#032-#079: Solid // also id 253: destroy-block
 end
 
 -- is block id solid? for wool
 function isSolidWool(id)
-	return id >= 32 and id <= 79 or id == 248--#032-#079: Solid // also id 253: destroy-block
+	return id >= 1 and id <= 79 or id == 248--#032-#079: Solid // also id 253: destroy-block
 end
 
 function ishalfSolidWool(id)
