@@ -24,20 +24,21 @@ size = 0  --unnötig nötige variable für die destroy animation
 playerStartPos = {
 	{10, 88, 10, 88, 10, 72, 10, 120, 0, 0, 0, 0, 0, 0},  --level 1: Room 1 x,y, Room 2 x,y, x3,y3, ...
 	{10, 120, 10, 120, 10, 112, 10, 104, 10, 0, 10, 0, 10, 0},	 --level 2: ...
-	{10, 88, 10, 0, 10, 0, 10, 0, 10, 0, 10, 0, 10, 0},
+	{10, 88, 10, 104, 10, 48, 10, 112, 10, 120, 10, 0, 10, 0},
 	{10, 88, 10, 0, 10, 0, 10, 0, 10, 0, 10, 0, 10, 0},
 	{10, 88, 10, 0, 10, 0, 10, 0, 10, 0, 10, 0, 10, 0}}
 woolStartPos = {
 	{24, 88, 24, 88, 24, 72, 24, 120, 0, 0, 0, 0, 0, 0},  --level 1:
 	{24, 120, 24, 120, 24, 112, 24, 104, 24, 0, 24, 0, 24, 0},	 --level 2: ...
-	{24, 88, 24, 0, 24, 0, 24, 0, 24, 0, 24, 0, 24, 0},
+	{24, 96, 24, 104, 24, 48, 24, 112, 24, 120, 24, 0, 24, 0},
 	{24, 88, 24, 0, 24, 0, 24, 0, 24, 0, 24, 0, 24, 0},
 	{24, 88, 24, 0, 24, 0, 24, 0, 24, 0, 24, 0, 24, 0}}
 
 
 function init()
     solids={[2]=true,[3]=true}
-	levelCounter = pmem(1) -- increments after every finished level
+	--levelCounter = pmem(1) -- increments after every finished level
+	levelCounter = 2
 	music (1,0,7,false) --menu theme
 	p={
 	x=0,
@@ -1248,7 +1249,7 @@ function TIC()
 --print(((inRoomNr-1)//8),120,84)
 --print(mode,84,84)
 --print(p.x,84,84,0)
---print(p.y,94,94,0)
+print(p.y,94,94,0)
 	
 end
 
