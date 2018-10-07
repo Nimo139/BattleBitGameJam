@@ -500,7 +500,7 @@ function animateBlocks()
 	-- animation with 2 sprites, second spirte should have the id + 1   
 	-- use the first sprite in the map editor
 	 
-	animatiedBlocks = {160, 162}  -- only the first id, that is on the map   (lava, water) 
+	animatiedBlocks = {160}  -- only the first id, that is on the map   (lava, water) 
 	
 	for y = 0,17,1 do
 		for x = 0,30,1 do
