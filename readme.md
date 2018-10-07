@@ -172,9 +172,7 @@ Pattern 55	Bass1
 Pattern 56	TriangleRiseUp
 
 - Track 05:
-Pattern	09	Lead2
-
-Pattern 57	empty
-Pattern 58	empty
-Pattern 59	empty
-Pattern 60	empty
+Pattern 57	Lead
+Pattern 58	Lead
+Pattern 59	Tri
+Pattern 60	Bass

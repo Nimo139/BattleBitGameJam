@@ -36,7 +36,7 @@ woolStartPos = {
 
 
 function init()
-    --solids={[2]=true,[3]=true}
+    solids={[2]=true,[3]=true}
 	levelCounter = pmem(1) -- increments after every finished level
 	music (1,0,7,false) --menu theme
 	p={
@@ -88,11 +88,19 @@ function isSolidWool(id)
 	return id >= 32 and id <= 79 or id == 248--#032-#079: Solid // also id 253: destroy-block
 end
 
+function isHalfSolid(id)
+	return id >= 80 and id <= 111
+end
+
 
 -- is a block at x,y solid? (actual map view)
 
 function solid(x,y)
     return isSolid(mget2((x)//8,(y)//8, inRoomNr))
+end
+
+function halfSolid(x,y)
+	return isHalfSolid(mget2((x)//8,(y)//8, inRoomNr))
 end
 
 --function solid(x,y)
@@ -1061,10 +1069,9 @@ function level()
     if solid(p.x+p.vx,p.y+p.vy) or solid(p.x+7+p.vx,p.y+p.vy) or solid(p.x+p.vx,p.y+7+p.vy) or solid(p.x+7+p.vx,p.y+7+p.vy) then
         p.vx=0
     end
-     
 	
 	-- gravity 
-    if solid(p.x,p.y+8+p.vy) or solid(p.x+7,p.y+8+p.vy) then
+    if solid(p.x,p.y+8+p.vy) or solid(p.x+7,p.y+8+p.vy) or halfSolid(p.x,p.y+8+p.vy) or halfSolid(p.x+7,p.y+8+p.vy) then
         p.vy=0
 		p.f = 0
     else
