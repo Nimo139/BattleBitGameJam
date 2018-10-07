@@ -621,7 +621,7 @@ function playMusic()
 	elseif track==5 then
 		rect(85,127,153*((c/20)+(t/(5.8*64)/19)),7,15)
 	elseif track==6 then
-		rect(85,127,153*((c/20)+(t/(2.4*64)/19)),7,15) -- TODO
+		rect(85,127,153*((c/20)+(t/(0.32*64)/19)),7,15)
 	end
 	
 	rect(85,127,153*((c/20)+(t/(7*64)/19)),7,15) --Song Progress Bar
@@ -678,8 +678,10 @@ function playMusic()
 	end
 	
 	if track==6 then -- TODO
-		if t==1920 then
-			c=0
+		if t==384 then
+			music (1,0,7,false)
+			mode = mode_music
+			setRoomNr(42)
 			t=0
 		end
 	end
