@@ -18,7 +18,7 @@ mode_controls = 8
 mode_debug = false
 mode=mode_menu
 
-woolStringLength = {2400,2000,2500,2700,2500}  -- for each level
+woolStringLength = {2400,2000,2500,2700,3000}  -- for each level
 size = 0  --unnötig nötige variable für die destroy animation
 
 playerStartPos = {
