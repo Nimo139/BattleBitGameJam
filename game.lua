@@ -18,7 +18,7 @@ mode_controls = 8
 mode_debug = false
 mode=mode_menu
 
-woolStringLength = {2400,2000,2500,2700,3000}  -- for each level
+woolStringLength = {2400,2000,2500,2700,4000}  -- for each level
 size = 0  --unnötig nötige variable für die destroy animation
 
 playerStartPos = {
@@ -37,8 +37,8 @@ woolStartPos = {
 
 function init()
     solids={[2]=true,[3]=true}
-	levelCounter = 0 -- increments after every finished level
-	levelCounter = pmem(1) --loading save
+	levelCounter = 1 -- increments after every finished level
+	--levelCounter = pmem(1) --loading save
 	music (1,0,7,false) --menu theme
 	p={
 	x=0,
