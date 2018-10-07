@@ -37,7 +37,7 @@ woolStartPos = {
 
 function init()
     solids={[2]=true,[3]=true}
-	--levelCounter = 3 -- increments after every finished level
+	levelCounter = 0 -- increments after every finished level
 	levelCounter = pmem(1) --loading save
 	music (1,0,7,false) --menu theme
 	p={
@@ -301,7 +301,7 @@ function woolUpdate()
 		w.vx = w.vx - 1 
 	end 
 	
-	if w.y > 128 then 
+	if w.y > 127 and w.room == inRoomNr then 
 		sfx(24,F5,-1,3,15,0)
 		respawnWool()
 	end
@@ -1128,7 +1128,7 @@ function level()
     
 	
 	-- respawn if p under map 
-	if p.y > 128 then
+	if p.y > 127 then
 		sfx(23,F5,-1,3,15,0)
 		respawn()
 	end
