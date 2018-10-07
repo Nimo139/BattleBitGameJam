@@ -27,14 +27,13 @@ https://github.com/nesbox/TIC-80/wiki
 
 ## Sprites:
 - #000: blank
-- #001 - #031: currently unused
-- #032 - #079: solid
+- #001 - #079: solid
 - #080 - #111: half-solid
-- #112 - #239: decoration / background
-- #240 - #255: special-event-sprites
+- #112 - #223: decoration / background
+- #224 - #255: special-event-sprites
 - #256 - #271: cat stuff
 - #272 - #276: wool stuff
-- #277 - #511: currently unused
+- #277 - #511: Logo etc.
 
 ## World Map:
 - 01: preLevelOne
@@ -42,16 +41,15 @@ https://github.com/nesbox/TIC-80/wiki
 - 9: preLevelTwo
 - 10-14: Level 2
 - 17: preLevelThree
-- 18-24: Level 3
+- 18-22: Level 3
 - 25: preLevelFour
-- 26-32: Level 4
+- 26-30: Level 4
 - 33: preLevelFive
 - 34-40: Level 5
-- 41: Game Done
 - 42: Music Box
 - 49: Debug
-- 6,7,8,15,16,43-48,50-62: currently unused
-- 63: Controls
+- 6,7,8,15,16,23,24,31,32,41,43-48,50-62: unused
+- 63: Controls & Game Done
 - 64: Main Screen
 
 ## Level:

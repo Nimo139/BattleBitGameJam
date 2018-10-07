@@ -18,7 +18,7 @@ mode_controls = 8
 mode_debug = false
 mode=mode_menu
 
-woolStringLength = {2400,2000,2500,2000,1000}  -- for each level
+woolStringLength = {2400,2000,2500,2700,2500}  -- for each level
 size = 0  --unnötig nötige variable für die destroy animation
 
 playerStartPos = {
@@ -37,8 +37,8 @@ woolStartPos = {
 
 function init()
     solids={[2]=true,[3]=true}
-	levelCounter = pmem(1) -- increments after every finished level
-	--levelCounter = 5
+	levelCounter = 0 -- increments after every finished level
+	levelCounter = pmem(1) --loading save
 	music (1,0,7,false) --menu theme
 	p={
 	x=0,
@@ -81,12 +81,12 @@ end
 
 -- is block id solid?  for player
 function isSolid(id)
-	return id >= 1 and id <= 79 or id >= 241 and id <= 246 or id == 247--#032-#079: Solid // also id 253: destroy-block
+	return id >= 1 and id <= 79 or id >= 241 and id <= 246 or id >= 232 and id <= 234 or id == 247--#032-#079: Solid // also id 253: destroy-block
 end
 
 -- is block id solid? for wool
 function isSolidWool(id)
-	return id >= 1 and id <= 79 or id == 248--#032-#079: Solid // also id 253: destroy-block
+	return id >= 1 and id <= 79 or id >= 248 and id <= 250 --#032-#079: Solid // also id 253: destroy-block
 end
 
 function ishalfSolidWool(id)
@@ -975,8 +975,20 @@ end
 	
 function game_done() --TODO
 
-	print("Congratz, you won the game ;D",10,10,15)
-	print("press X to continue!",100,110,15)
+	if t >= 36 then
+		if t%60 < 36 then
+			spr(360,88,20,0,1,0,0,8,5) --3
+		else
+			spr(352,88,20,0,1,0,0,8,5) --Logo
+		end
+		print("Congratz, you won the game!",46,66,0)
+		print("Congratz, you won the game!",45,65,15)
+	end
+
+	if t >= 470 then
+		print("Press X to continue!",68,86,0)
+		print("Press X to continue!",67,85,15)
+	end
 	if btnp(5) or keyp(24) then
 		mode=mode_menu
 		setRoomNr(64)
@@ -1011,8 +1023,9 @@ function prelevel()
 	if levelCounter == 5 then
 		levelCounter = 0
 		pmem(1, levelCounter)
-		setRoomNr(41)
+		setRoomNr(63)
 		mode=mode_done
+		t = 0
 		music (5,0,63,false)
 		return
 	end
