@@ -8,6 +8,7 @@ Wiki mit nützlichen Kram:
 https://github.com/nesbox/TIC-80/wiki
 
 Link zu BotB: https://battleofthebits.org/arena/Entry/Katzu/29526/
+
 Link zur Tic-Seite: https://tic.computer/play?cart=646
 
 ## Steuerung 
