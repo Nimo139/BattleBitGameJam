@@ -161,7 +161,11 @@ function isWoolInBlockId(id)
 end
 
 -- draws a parabel between 2 points
-function cLine(x1,y1,x2,y2, color)
+function cLine(x1,y1,x2,y2, color)	
+	if x1 == -1 or x2 == -1 then 
+		return 
+	end
+	
 	if x2 < x1 then
 		temp = x2
 		x2 = x1 
@@ -413,8 +417,8 @@ function respawnWool()
 	w.x = woolStartPos[(levelCounter+1)][1+offset*2]
 	w.y = woolStartPos[(levelCounter+1)][2+offset*2]
 	
-	w.track[inRoomNr][(w.length[w.room]-1)*2] = w.x
-	w.track[inRoomNr][(w.length[w.room]-1)*2+1] = w.y
+	w.track[inRoomNr][(w.length[w.room]-1)*2] = -1
+	w.track[inRoomNr][(w.length[w.room]-1)*2+1] = -1
 	
 end
 
@@ -427,6 +431,9 @@ function drawWoolString(x, y)
 			
 		end
 		if w.room == inRoomNr then 
+			if w.track[inRoomNr][(w.length[w.room]-1)*2] == -1 then 
+				return 
+			end
 			line(w.track[inRoomNr][(w.length[w.room]-1)*2], w.track[inRoomNr][(w.length[w.room]-1)*2+1], w.x+4, w.y+6 , 276)
 		end
 	end	
