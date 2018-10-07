@@ -806,30 +806,41 @@ end
 function controls()
 	print("Controls:", 96,23,0)
 	print("Controls:", 95,22,15)
+	spr(256+t%40//10,22,33,0,1,t%200//100,0,0)  -- L/R
 	print("Arrows L/R:", 36,36,0)
 	print("Arrows L/R:", 35,35,15)
 	print("Move", 151,36,0)
 	print("Move", 150,35,15)
+	spr(260+t%80//40,22,43,0,1,0,0,0)  -- Jump
 	print("Arrow up:", 36,46,0)
 	print("Arrow up:", 35,45,15)
 	print("Jump", 151,46,0)
 	print("Jump", 150,45,15)
+	spr(268+t%40//20,22,53,0,1,0,0,0)   -- Duck 
 	print("Arrow down:", 36,56,0)
 	print("Arrow down:", 35,55,15)
 	print("Sneak", 151,56,0)
 	print("Sneak", 150,55,15)
+	spr(264+t%30//15,22,63,0,1,0,0,0)	-- Throw
 	print("D:", 36,66,0)
 	print("D:", 35,65,15)
 	print("Throw Wool", 151,66,0)
 	print("Throw Wool", 150,65,15)
+	if t%60 > 30 then                      --Pull
+		spr(264+t%30//15,22,73,0,1,0,0,0)
+	else
+		spr(268,22,73,0,1,0,0,0)	--  +t%30//15
+	end
 	print("D + Sneak (near Wool):", 36,76,0)
 	print("D + Sneak (near Wool):", 35,75,15)
 	print("Pull Wool", 151,76,0)
 	print("Pull Wool", 150,75,15)
+	--spr(HierDeadIdEinsetzten,22,83,0,1,0,0,0)	  -- reset 
 	print("R:", 36,86,0)
 	print("R:", 35,85,15)
 	print("Reset Room", 151,86,0)
 	print("Reset Room", 150,85,15)
+	--spr(HierDeadDeadIdEinsetzten,22,93,0,1,0,0,0)	  -- reset hold 
 	print("R (hold):", 36,96,0)
 	print("R (hold):", 35,95,15)
 	print("Reset Level", 151,96,0)
