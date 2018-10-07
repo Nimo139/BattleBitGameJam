@@ -12,9 +12,9 @@ https://github.com/nesbox/TIC-80/wiki
 - Arrow up: Jump
 - Arrow down: Sneak
 - D: Throw Wool
-- D + Sneak: Pull wool (near to the wool)
-- R: Reset level
-
+- D + Sneak: Pull wool (near wool)
+- R: Reset Screen
+- R (hold): Reset Level
 
 # Notizen und Struktur
 
@@ -38,9 +38,9 @@ https://github.com/nesbox/TIC-80/wiki
 
 ## World Map:
 - 01: preLevelOne
-- 2-8: Level 1
+- 2-5: Level 1
 - 9: preLevelTwo
-- 10-16: Level 2
+- 10-14: Level 2
 - 17: preLevelThree
 - 18-24: Level 3
 - 25: preLevelFour
@@ -49,13 +49,15 @@ https://github.com/nesbox/TIC-80/wiki
 - 34-40: Level 5
 - 41: Game Done
 - 42: Music Box
-- 43-63: currently unused
+- 49: Debug
+- 6,7,8,15,16,43-48,50-62: currently unused
+- 63: Controls
 - 64: Main Screen
 
 ## Level:
-- 01: Basic Tutorial (kleiner Höhlenteil in der Mitte)
-- 02: Basic mit einer neuen Sache (erster richtiger Level) (100% overworld?)
-- 03: Overworld mit Übergang zur Höhle (anspruchsvoller)
+- 01: Basic Tutorial
+- 02: Basic mit Kakteen (Übergang zur Höhle)
+- 03: Höhle (erst Dirt, dann Cavern) (anspruchsvoller)
 - 04: Höhle - knifflig - am Ende Übergang zum letzten Gebiet/Level
 - 05: brutal schwer; optisch anders (Castle? Hölle? Spooky?)
 
