@@ -26,19 +26,19 @@ playerStartPos = {
 	{10, 120, 10, 120, 10, 112, 10, 104, 10, 40, 0, 0, 0, 0},	 --level 2: ...
 	{10, 88, 10, 104, 10, 48, 10, 112, 10, 120, 10, 0, 10, 0},
 	{10, 104, 10, 104, 10, 88, 10, 56, 10, 112, 10, 0, 10, 0},
-	{10, 88, 10, 0, 10, 0, 10, 0, 10, 0, 10, 0, 10, 0}}
+	{10, 96, 10, 80, 10, 88, 10, 24, 10, 72, 10, 72, 10, 0}}
 woolStartPos = {
 	{24, 88, 24, 88, 24, 72, 24, 120, 0, 0, 0, 0, 0, 0},  --level 1:
 	{24, 120, 24, 120, 24, 112, 24, 104, 24, 40, 0, 0, 0, 0},	 --level 2: ...
 	{24, 96, 24, 104, 24, 48, 24, 112, 24, 120, 24, 0, 24, 0},
 	{24, 104, 24, 104, 24, 88, 24, 56, 24, 112, 24, 0, 24, 0},
-	{24, 88, 24, 0, 24, 0, 24, 0, 24, 0, 24, 0, 24, 0}}
+	{24, 96, 24, 80, 24, 88, 24, 24, 24, 72, 24, 72, 24, 0}}
 
 
 function init()
     solids={[2]=true,[3]=true}
-	levelCounter = 0 -- increments after every finished level
-	levelCounter = pmem(1) --loading save
+	levelCounter = 4 -- increments after every finished level
+	--levelCounter = pmem(1) --loading save
 	music (1,0,7,false) --menu theme
 	p={
 	x=0,
@@ -1222,6 +1222,15 @@ function level()
 		music (4,0,63,false)
 	end
 	
+	if inRoomNr==15 then
+		print("Wow! Hey! Congratulations!",31,66,0)
+		print("Wow! Hey! Congratulations!",30,65,15)
+		print("Looks like you found...",41,76,0)
+		print("Looks like you found...",40,75,15)
+		print("nothing!",76,86,0)
+		print("nothing!",75,85,15)
+	end
+	
 	
 end
 	
@@ -1262,7 +1271,7 @@ function TIC()
 --print(((inRoomNr-1)//8),120,84)
 --print(mode,84,84)
 --print(p.x,84,84,0)
-print(p.y,94,94,0)
+--print(p.y,94,94,0)
 	
 end
 
