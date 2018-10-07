@@ -835,12 +835,12 @@ function controls()
 	print("D + Sneak (near Wool):", 35,75,15)
 	print("Pull Wool", 151,76,0)
 	print("Pull Wool", 150,75,15)
-	--spr(HierDeadIdEinsetzten,22,83,0,1,0,0,0)	  -- reset 
+	spr(224+t%60//30,22,83,0,1,0,0,0)	  -- reset 
 	print("R:", 36,86,0)
 	print("R:", 35,85,15)
 	print("Reset Room", 151,86,0)
 	print("Reset Room", 150,85,15)
-	--spr(HierDeadDeadIdEinsetzten,22,93,0,1,0,0,0)	  -- reset hold 
+	spr(226,22,93,0,1,0,0,0)	  -- reset hold 
 	print("R (hold):", 36,96,0)
 	print("R (hold):", 35,95,15)
 	print("Reset Level", 151,96,0)
