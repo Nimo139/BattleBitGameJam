@@ -37,8 +37,8 @@ woolStartPos = {
 
 function init()
     solids={[2]=true,[3]=true}
-	--levelCounter = pmem(1) -- increments after every finished level
-	levelCounter = 2
+	levelCounter = pmem(1) -- increments after every finished level
+	--levelCounter = 1
 	music (1,0,7,false) --menu theme
 	p={
 	x=0,
